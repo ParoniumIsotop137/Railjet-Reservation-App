@@ -19,4 +19,16 @@ public enum Stations {
     public int getId() {
         return id;
     }
+
+    public static Stations getStation(String StationName){
+
+        for (Stations item: Stations.values())
+        {
+            if(StationName.equals(item.getName()) || item.name.equals(StationName)){
+                return item;
+            }
+
+        }
+        return null;
+    }
 }
