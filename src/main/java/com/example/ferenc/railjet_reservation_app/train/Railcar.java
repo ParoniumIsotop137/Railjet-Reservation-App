@@ -42,13 +42,37 @@ public class Railcar {
         return reservedSeatNumber;
     }
 
-    public void setFreeSeatNumber(Seat seat) {
+    public void setFreeSeatNumberAndSeat(Seat seat) {
 
         if(this.freeSeatNumber <= maxSeatNumber){
             this.freeSeatNumber = (maxSeatNumber-reservedSeatNumber);
             addNewSeatToList(seat);
         }
+        else{
+            if(CheckSeatReservation(seat.getStartStation())){
+                setFreeSeatNumberAndSeat(seat);
+            }
+            else{
+                throw new IllegalArgumentException("A kiválasztott kocsiban már nincsen több szabad hely!");
+            }
+        }
 
+    }
+
+    private boolean CheckSeatReservation(Stations startStation) {
+
+        for (Seat seat : seats) {
+            seat.checkIfSeatFree(startStation.getName());
+        }
+        int newFreeSeatNumber = (int) seats.stream().filter(s -> s.isReserved() == true).count();
+
+        if(newFreeSeatNumber > this.freeSeatNumber){
+            this.freeSeatNumber = newFreeSeatNumber;
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 
