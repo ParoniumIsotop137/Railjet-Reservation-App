@@ -1,5 +1,7 @@
 package com.example.ferenc.railjet_reservation_app.train;
 
+import com.example.ferenc.railjet_reservation_app.routes.Rjx162Stations;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +61,7 @@ public class Railcar {
 
     }
 
-    private boolean CheckSeatReservation(Stations startStation) {
+    private boolean CheckSeatReservation(Rjx162Stations startStation) {
 
         for (Seat seat : seats) {
             seat.checkIfSeatFree(startStation.getName());

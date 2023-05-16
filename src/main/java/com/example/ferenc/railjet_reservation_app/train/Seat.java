@@ -1,23 +1,25 @@
 package com.example.ferenc.railjet_reservation_app.train;
 
+import com.example.ferenc.railjet_reservation_app.routes.Rjx162Stations;
+
 public class Seat {
 
-    private Stations startStation;
-    private Stations endStation;
+    private Rjx162Stations startStation;
+    private Rjx162Stations endStation;
 
     private boolean isReserved;
 
-    public Seat(Stations startStation, Stations endStation, boolean isReserved) {
+    public Seat(Rjx162Stations startStation, Rjx162Stations endStation, boolean isReserved) {
         this.startStation = startStation;
         this.endStation = endStation;
         this.isReserved = isReserved;
     }
 
-    public Stations getStartStation() {
+    public Rjx162Stations getStartStation() {
         return startStation;
     }
 
-    public Stations getEndStation() {
+    public Rjx162Stations getEndStation() {
         return endStation;
     }
 
@@ -25,7 +27,7 @@ public class Seat {
         return isReserved;
     }
 
-    public void setEndStation(Stations endStation) {
+    public void setEndStation(Rjx162Stations endStation) {
         this.endStation = endStation;
     }
 
@@ -33,13 +35,13 @@ public class Seat {
         isReserved = reserved;
     }
 
-    public void setStartStation(Stations startStation) {
+    public void setStartStation(Rjx162Stations startStation) {
         this.startStation = startStation;
     }
 
     public void checkIfSeatFree(String StationName){
 
-        Stations station = Stations.getStation(StationName);
+        Rjx162Stations station = Rjx162Stations.getStation(StationName);
 
         if(station.getId() >= this.endStation.getId()){
             this.isReserved = false;
