@@ -1,6 +1,6 @@
 package com.example.ferenc.railjet_reservation_app.train;
 
-import com.example.ferenc.railjet_reservation_app.routes.Rjx162Stations;
+import com.example.ferenc.railjet_reservation_app.routes.RJX162Stations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ public class Railcar {
     private int reservedSeatsNumber;
 
     private List<Seat> seats;
+
 
     public Railcar(String type, ClassType classType, int maxSeatNumber, int freeSeatNumber, int reservedSeatNumber) {
         this.type = type;
@@ -46,8 +47,12 @@ public class Railcar {
 
     public void setFreeSeatNumberAndSeat(Seat seat) {
 
-        if(this.freeSeatsNumber <= maxSeatsNumber){
-            this.freeSeatsNumber = (maxSeatsNumber - reservedSeatsNumber);
+        this.reservedSeatsNumber++;
+
+        this.freeSeatsNumber += (this.maxSeatsNumber - this.reservedSeatsNumber);
+
+        if(this.freeSeatsNumber > 0){
+
             addNewSeatToList(seat);
         }
         else{
@@ -61,12 +66,12 @@ public class Railcar {
 
     }
 
-    private boolean CheckSeatReservation(Rjx162Stations startStation) {
+    private boolean CheckSeatReservation(RJX162Stations startStation) {
 
         for (Seat seat : seats) {
             seat.checkIfSeatFree(startStation.getName());
         }
-        int newFreeSeatNumber = (int) seats.stream().filter(s -> s.isReserved() == true).count();
+        int newFreeSeatNumber = (int) seats.stream().filter(s -> s.isReserved() == false).count();
 
         if(newFreeSeatNumber > this.freeSeatsNumber){
             this.freeSeatsNumber = newFreeSeatNumber;

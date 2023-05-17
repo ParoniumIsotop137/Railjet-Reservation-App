@@ -1,25 +1,25 @@
 package com.example.ferenc.railjet_reservation_app.train;
 
-import com.example.ferenc.railjet_reservation_app.routes.Rjx162Stations;
+import com.example.ferenc.railjet_reservation_app.routes.RJX162Stations;
 
 public class Seat {
 
-    private Rjx162Stations startStation;
-    private Rjx162Stations endStation;
+    private RJX162Stations startStation;
+    private RJX162Stations endStation;
 
     private boolean isReserved;
 
-    public Seat(Rjx162Stations startStation, Rjx162Stations endStation, boolean isReserved) {
+    public Seat(RJX162Stations startStation, RJX162Stations endStation, boolean isReserved) {
         this.startStation = startStation;
         this.endStation = endStation;
         this.isReserved = isReserved;
     }
 
-    public Rjx162Stations getStartStation() {
+    public RJX162Stations getStartStation() {
         return startStation;
     }
 
-    public Rjx162Stations getEndStation() {
+    public RJX162Stations getEndStation() {
         return endStation;
     }
 
@@ -27,7 +27,7 @@ public class Seat {
         return isReserved;
     }
 
-    public void setEndStation(Rjx162Stations endStation) {
+    public void setEndStation(RJX162Stations endStation) {
         this.endStation = endStation;
     }
 
@@ -35,13 +35,13 @@ public class Seat {
         isReserved = reserved;
     }
 
-    public void setStartStation(Rjx162Stations startStation) {
+    public void setStartStation(RJX162Stations startStation) {
         this.startStation = startStation;
     }
 
     public void checkIfSeatFree(String StationName){
 
-        Rjx162Stations station = Rjx162Stations.getStation(StationName);
+        RJX162Stations station = RJX162Stations.getStation(StationName);
 
         if(station.getId() >= this.endStation.getId()){
             this.isReserved = false;
