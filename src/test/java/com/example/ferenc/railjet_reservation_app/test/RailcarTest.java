@@ -23,13 +23,13 @@ public class RailcarTest {
 
         Seat testSeat4 = new Seat(RJX162Stations.SALZBURG, RJX162Stations.LANDECK);
 
-        testCar.setFreeSeatNumberAndSeat(testSeat);
-        testCar.setFreeSeatNumberAndSeat(testSeat2);
-        testCar.setFreeSeatNumberAndSeat(testSeat3);
+        testCar.setReservedSeatNumberAndSeat(testSeat);
+        testCar.setReservedSeatNumberAndSeat(testSeat2);
+        testCar.setReservedSeatNumberAndSeat(testSeat3);
 
 
 
-        assertDoesNotThrow(() -> testCar.setFreeSeatNumberAndSeat(testSeat4));
+        assertDoesNotThrow(() -> testCar.setReservedSeatNumberAndSeat(testSeat4));
 
     }
     @Test
@@ -45,11 +45,11 @@ public class RailcarTest {
 
         Seat testSeat4 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.ZURICH);
 
-        testCar.setFreeSeatNumberAndSeat(testSeat);
-        testCar.setFreeSeatNumberAndSeat(testSeat2);
-        testCar.setFreeSeatNumberAndSeat(testSeat3);
+        testCar.setReservedSeatNumberAndSeat(testSeat);
+        testCar.setReservedSeatNumberAndSeat(testSeat2);
+        testCar.setReservedSeatNumberAndSeat(testSeat3);
 
-        assertThrows(IllegalArgumentException.class, () -> testCar.setFreeSeatNumberAndSeat(testSeat4));
+        assertThrows(IllegalArgumentException.class, () -> testCar.setReservedSeatNumberAndSeat(testSeat4));
 
 
 
@@ -67,11 +67,11 @@ public class RailcarTest {
 
         Seat testSeat4 = new Seat(RJX162Stations.TATABANYA, RJX162Stations.GYOR);
 
-        testCar.setFreeSeatNumberAndSeat(testSeat);
-        testCar.setFreeSeatNumberAndSeat(testSeat2);
-        testCar.setFreeSeatNumberAndSeat(testSeat3);
+        testCar.setReservedSeatNumberAndSeat(testSeat);
+        testCar.setReservedSeatNumberAndSeat(testSeat2);
+        testCar.setReservedSeatNumberAndSeat(testSeat3);
 
-        assertThrows(IllegalArgumentException.class, () -> testCar.setFreeSeatNumberAndSeat(testSeat4));
+        assertThrows(IllegalArgumentException.class, () -> testCar.setReservedSeatNumberAndSeat(testSeat4));
 
 
     }
@@ -88,11 +88,11 @@ public class RailcarTest {
 
         Seat testSeat4 = new Seat(RJX162Stations.WIENHBF, RJX162Stations.ZURICH);
 
-        testCar.setFreeSeatNumberAndSeat(testSeat);
-        testCar.setFreeSeatNumberAndSeat(testSeat2);
-        testCar.setFreeSeatNumberAndSeat(testSeat3);
+        testCar.setReservedSeatNumberAndSeat(testSeat);
+        testCar.setReservedSeatNumberAndSeat(testSeat2);
+        testCar.setReservedSeatNumberAndSeat(testSeat3);
 
-        assertDoesNotThrow(() -> testCar.setFreeSeatNumberAndSeat(testSeat4));
+        assertDoesNotThrow(() -> testCar.setReservedSeatNumberAndSeat(testSeat4));
     }
 
 }

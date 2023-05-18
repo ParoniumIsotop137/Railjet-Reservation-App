@@ -1,7 +1,5 @@
 package com.example.ferenc.railjet_reservation_app.train;
 
-import com.example.ferenc.railjet_reservation_app.routes.RJX162Stations;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +39,7 @@ public class Railcar {
         return reservedSeatsNumber;
     }
 
-    public void setFreeSeatNumberAndSeat(Seat seat) {
+    public void setReservedSeatNumberAndSeat(Seat seat) {
 
         this.reservedSeatsNumber++;
 
