@@ -16,11 +16,11 @@ public class Railcar {
     private List<Seat> seats;
 
 
-    public Railcar(String type, ClassType classType, int maxSeatNumber, int reservedSeatNumber) {
+    public Railcar(String type, ClassType classType, int maxSeatNumber) {
         this.type = type;
         this.classType = classType;
         this.maxSeatsNumber = maxSeatNumber;
-        this.reservedSeatsNumber = reservedSeatNumber;
+        this.reservedSeatsNumber = 0;
         this.seats = new ArrayList<Seat>();
     }
 
@@ -45,40 +45,36 @@ public class Railcar {
 
         this.reservedSeatsNumber++;
 
-        if(this.reservedSeatsNumber <= this.maxSeatsNumber){
+        if(this.reservedSeatsNumber < this.maxSeatsNumber){
 
             addNewSeatToList(seat);
         }
         else{
-            if(CheckSeatReservation(seat.getStartStation())){
-                setFreeSeatNumberAndSeat(seat);
-            }
-            else{
-                throw new IllegalArgumentException("A kiválasztott kocsiban már nincsen több szabad hely!");
-            }
+            CheckSeatReservation(seat);
+
         }
 
     }
+    public void CheckSeatReservation(Seat seat) {
 
-    private boolean CheckSeatReservation(RJX162Stations startStation) {
+        for (Seat item : this.seats) {
+            item.checkIfSeatFree(seat.getStartStation(), seat.getEndStation());
+        }
+        long reservedSeats = this.seats.stream().filter(s -> s.isReserved() == true).count();
 
-        for (Seat seat : seats) {
-            seat.checkIfSeatFree(startStation.getName());
-        }
-        this.reservedSeatsNumber = (int) seats.stream().filter(s -> s.isReserved() == true).count();
-
-        if(this.reservedSeatsNumber < this.maxSeatsNumber){
-            return true;
-        }
-        else{
-            return false;
-        }
+         if(reservedSeats < this.reservedSeatsNumber){
+            this.reservedSeatsNumber = (int) reservedSeats;
+            addNewSeatToList(seat);
+            }
+         else{
+             throw new IllegalArgumentException("A kiválasztott kocsiban már nincsen szabad hely!");
+         }
 
     }
 
-    private void addNewSeatToList(Seat seat) {
+    public void addNewSeatToList(Seat seat) {
 
-        seats.add(seat);
+        this.seats.add(seat);
 
     }
 

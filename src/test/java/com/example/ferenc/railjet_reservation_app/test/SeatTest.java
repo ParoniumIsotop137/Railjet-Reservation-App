@@ -13,9 +13,9 @@ public class SeatTest {
         Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM);
         Seat testSeat2 = new Seat(RJX162Stations.MOSONMAGYAROVAR, RJX162Stations.SALZBURG);
 
-        testSeat.checkIfSeatFree(testSeat2.getStartStation().getName());
+        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
 
-       assertTrue(testSeat.isReserved());
+        assertFalse(testSeat.isReserved());
 
     }
 
@@ -24,9 +24,28 @@ public class SeatTest {
         Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM);
         Seat testSeat2 = new Seat(RJX162Stations.WIENHBF, RJX162Stations.SALZBURG);
 
-        testSeat.checkIfSeatFree(testSeat2.getStartStation().getName());
+        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
 
         assertFalse(testSeat.isReserved());
+    }
+    @Test
+    void checkIfSeatFreeTest3(){
+
+        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR);
+        Seat testSeat2 = new Seat(RJX162Stations.WIENHBF, RJX162Stations.SALZBURG);
+
+        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
+        assertFalse(testSeat.isReserved());
+
+    }
+    @Test
+    void checkIfSeatFreeTest4(){
+
+        Seat testSeat = new Seat(RJX162Stations.WIENHBF, RJX162Stations.SALZBURG);
+        Seat testSeat2 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR);
+
+        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
+        assertTrue(testSeat.isReserved());
     }
 
 }
