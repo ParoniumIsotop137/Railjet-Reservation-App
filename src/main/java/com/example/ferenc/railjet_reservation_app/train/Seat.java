@@ -9,10 +9,10 @@ public class Seat {
 
     private boolean isReserved;
 
-    public Seat(RJX162Stations startStation, RJX162Stations endStation, boolean isReserved) {
+    public Seat(RJX162Stations startStation, RJX162Stations endStation) {
         this.startStation = startStation;
         this.endStation = endStation;
-        this.isReserved = isReserved;
+        this.isReserved = true;
     }
 
     public RJX162Stations getStartStation() {
@@ -39,14 +39,20 @@ public class Seat {
         this.startStation = startStation;
     }
 
-    public void checkIfSeatFree(String StationName){
+    public void checkIfSeatFree(String startStationName){
 
-        RJX162Stations station = RJX162Stations.getStation(StationName);
+        RJX162Stations station = RJX162Stations.getStation(startStationName);
 
-        if(station.getId() >= this.endStation.getId()){
+        if(station.getId() == this.startStation.getId()){
+            this.isReserved = true;
+        }
+        else if(station.getId() == this.endStation.getId()){
             this.isReserved = false;
         }
-        else{
+        else if(station.getId() > this.endStation.getId()){
+            this.isReserved = false;
+        }
+        else if(station.getId() < this.endStation.getId()){
             this.isReserved = true;
         }
 

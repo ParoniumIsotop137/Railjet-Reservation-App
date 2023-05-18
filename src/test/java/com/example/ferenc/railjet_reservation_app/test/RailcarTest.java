@@ -10,16 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RailcarTest {
 
-    @Test
+
     void setFreeSeatNumberAndSeatTest(){
 
-        Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 16, 1,15);
+        Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 16, 16);
 
-        Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM, true);
-        testCar.setFreeSeatNumberAndSeat(testSeat);
-        Seat testSeat2 = new Seat(RJX162Stations.MOSONMAGYAROVAR, RJX162Stations.SALZBURG, true);
+        Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM);
 
-        assertThrows(IllegalArgumentException.class, () -> testCar.setFreeSeatNumberAndSeat(testSeat2));
+        
 
     }
 

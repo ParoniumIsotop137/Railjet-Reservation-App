@@ -10,17 +10,16 @@ public class Railcar {
     private String type;
     private ClassType classType;
     private int maxSeatsNumber;
-    private int freeSeatsNumber;
+
     private int reservedSeatsNumber;
 
     private List<Seat> seats;
 
 
-    public Railcar(String type, ClassType classType, int maxSeatNumber, int freeSeatNumber, int reservedSeatNumber) {
+    public Railcar(String type, ClassType classType, int maxSeatNumber, int reservedSeatNumber) {
         this.type = type;
         this.classType = classType;
         this.maxSeatsNumber = maxSeatNumber;
-        this.freeSeatsNumber = freeSeatNumber;
         this.reservedSeatsNumber = reservedSeatNumber;
         this.seats = new ArrayList<Seat>();
     }
@@ -37,9 +36,6 @@ public class Railcar {
         return maxSeatsNumber;
     }
 
-    public int getFreeSeatsNumber() {
-        return freeSeatsNumber;
-    }
 
     public int getReservedSeatsNumber() {
         return reservedSeatsNumber;
@@ -49,9 +45,7 @@ public class Railcar {
 
         this.reservedSeatsNumber++;
 
-        this.freeSeatsNumber += (this.maxSeatsNumber - this.reservedSeatsNumber);
-
-        if(this.freeSeatsNumber > 0){
+        if(this.reservedSeatsNumber <= this.maxSeatsNumber){
 
             addNewSeatToList(seat);
         }
@@ -71,10 +65,9 @@ public class Railcar {
         for (Seat seat : seats) {
             seat.checkIfSeatFree(startStation.getName());
         }
-        int newFreeSeatNumber = (int) seats.stream().filter(s -> s.isReserved() == false).count();
+        this.reservedSeatsNumber = (int) seats.stream().filter(s -> s.isReserved() == true).count();
 
-        if(newFreeSeatNumber > this.freeSeatsNumber){
-            this.freeSeatsNumber = newFreeSeatNumber;
+        if(this.reservedSeatsNumber < this.maxSeatsNumber){
             return true;
         }
         else{
