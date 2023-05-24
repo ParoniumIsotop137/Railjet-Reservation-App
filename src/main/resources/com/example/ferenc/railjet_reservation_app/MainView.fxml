@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -33,34 +32,18 @@
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <Spinner fx:id="spnNumberOfPersons" editable="true" layoutX="341.0" layoutY="85.0" prefHeight="25.0" prefWidth="104.0" />
-      <Label fx:id="lblFreePlaces" layoutX="25.0" layoutY="286.0" style="-fx-background-color: #E5E5E5;" text="Szabad helyek / Freie Plätze:" textAlignment="CENTER" textFill="#fd1212">
+      <Label fx:id="lblFreePlaces" layoutX="286.0" layoutY="86.0" style="-fx-background-color: #E5E5E5;" text="Szabad helyek / Freie Plätze:" textAlignment="CENTER" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblNumberOfPersons" layoutX="291.0" layoutY="57.0" style="-fx-background-color: #E5E5E5;" text="Utasok száma / Anzahl der Reisenden:" textAlignment="CENTER" textFill="#fd1212">
-         <font>
-            <Font name="Segoe UI Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblPersons" layoutX="445.0" layoutY="89.0" style="-fx-background-color: #E5E5E5;" text="Fő / Personen" textAlignment="CENTER" textFill="#fd1212">
-         <font>
-            <Font name="Segoe UI Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblShowFreePlaces" layoutX="118.0" layoutY="316.0" style="-fx-background-color: #E5E5E5;" textAlignment="CENTER" textFill="#fd1212" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+      <Label fx:id="lblShowFreePlaces" layoutX="379.0" layoutY="116.0" style="-fx-background-color: #E5E5E5;" textAlignment="CENTER" textFill="#fd1212" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
       <Button fx:id="btnSelectedTrain" layoutX="56.0" layoutY="131.0" mnemonicParsing="false" onAction="#LoadTrainData" text="Kiválaszt / Auswählen" />
-      <Label fx:id="lblTrainPath" layoutX="82.0" layoutY="164.0" textAlignment="CENTER" textFill="#fd1212" textOverrun="WORD_ELLIPSIS">
-         <font>
-            <Font name="Segoe UI Black Italic" size="16.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnChoose" layoutX="342.0" layoutY="200.0" mnemonicParsing="false" onAction="#NextStep" text="Tovább / Weiter" />
+      <Button fx:id="btnChoose" layoutX="328.0" layoutY="164.0" mnemonicParsing="false" onAction="#NextStep" text="Tovább / Weiter" />
       <Button fx:id="btnSelectedCar" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#ShowFreePlaceNumber" text="Kiválaszt / Auswählen" />
    </children>
 </AnchorPane>

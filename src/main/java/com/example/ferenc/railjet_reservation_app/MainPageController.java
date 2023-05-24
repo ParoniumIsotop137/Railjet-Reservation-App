@@ -25,16 +25,9 @@ public class MainPageController implements Initializable {
     private Button btnSelectedTrain;
     @FXML
     private Button btnSelectedCar;
-    @FXML
-    private Label lblNumberOfPersons;
-    @FXML
-    private Label lblPersons;
 
     @FXML
     private ChoiceBox<String> chBoxTrainClass;
-
-    @FXML
-    private Spinner<Integer> spnNumberOfPersons;
 
     @FXML
     private ChoiceBox<String> chBoxTrainNumber;
@@ -46,8 +39,6 @@ public class MainPageController implements Initializable {
 
     @FXML
     private Label lblCar;
-    @FXML
-    private Label lblTrainPath;
     @FXML
     private AnchorPane mainAnchorPane;
 
@@ -64,8 +55,6 @@ public class MainPageController implements Initializable {
 
     private Railcar Bmpvz;
 
-    private Seat seat;
-
     private static List<Railcar> Rjx162;
 
     private Alert alert;
@@ -81,12 +70,7 @@ public class MainPageController implements Initializable {
         lblCar.setVisible(false);
         chBoxTrainClass.setVisible(false);
         btnSelectedCar.setVisible(false);
-        lblNumberOfPersons.setVisible(false);
 
-        spnNumberOfPersons.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,500, 1));
-        spnNumberOfPersons.setVisible(false);
-
-        lblPersons.setVisible(false);
         btnChoose.setVisible(false);
 
         freePlaces = 0;
@@ -130,23 +114,12 @@ public class MainPageController implements Initializable {
     @FXML
     public void NextStep(){
 
-        if(spnNumberOfPersons.getValue() > freePlaces){
-            alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Figyelem!");
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.setContentText("A kiválasztott kocsiban már nincsen elegendő hely "+String.valueOf(spnNumberOfPersons.getValue())+" fő részére! / Ez sind nicht genügend freie Plätze für "+String.valueOf(spnNumberOfPersons.getValue())+" Personen!");
-            alert.show();
-        }
-        else{
-            NewWindowOpening();
-        }
-
+        NewWindowOpening();
 
     }
 
     private void NewWindowOpening() {
 
-        
 
     }
 
@@ -164,10 +137,6 @@ public class MainPageController implements Initializable {
                 }
             }
         }
-        lblNumberOfPersons.setVisible(true);
-        spnNumberOfPersons.setVisible(true);
-        spnNumberOfPersons.setEditable(true);
-        lblPersons.setVisible(true);
         btnChoose.setVisible(true);
 
     }
