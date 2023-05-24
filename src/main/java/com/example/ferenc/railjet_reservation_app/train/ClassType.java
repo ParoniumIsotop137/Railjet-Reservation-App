@@ -2,7 +2,7 @@ package com.example.ferenc.railjet_reservation_app.train;
 
 public enum ClassType {
 
-    PREMIUM("Premium class"), BUSINESS("Business class"), ECONOMY("Economy class");
+    PREMIUM("Premium"), BUSINESS("Business"), ECONOMY("Economy");
 
     private final String className;
 

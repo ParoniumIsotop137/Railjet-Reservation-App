@@ -7,9 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,24 +23,31 @@ public class MainPageController implements Initializable {
 
     @FXML
     private Button btnSelectedTrain;
+    @FXML
+    private Button btnSelectedCar;
+    @FXML
+    private Label lblNumberOfPersons;
+    @FXML
+    private Label lblPersons;
 
     @FXML
     private ChoiceBox<String> chBoxTrainClass;
 
     @FXML
-    private Spinner<?> chBoxNumberOfPersons;
+    private Spinner<Integer> spnNumberOfPersons;
 
     @FXML
     private ChoiceBox<String> chBoxTrainNumber;
 
     @FXML
     private Label lblFreePlaces;
+    @FXML
+    private Label lblShowFreePlaces;
 
+    @FXML
+    private Label lblCar;
     @FXML
     private Label lblTrainPath;
-    @FXML
-    private Label lblClassType;
-
     @FXML
     private AnchorPane mainAnchorPane;
 
@@ -61,10 +68,28 @@ public class MainPageController implements Initializable {
 
     private static List<Railcar> Rjx162;
 
+    private Alert alert;
+    private int freePlaces;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         chBoxTrainNumber.getItems().add("RJX162");
+        chBoxTrainNumber.getSelectionModel().select(0);
+
+        lblFreePlaces.setVisible(false);
+        lblCar.setVisible(false);
+        chBoxTrainClass.setVisible(false);
+        btnSelectedCar.setVisible(false);
+        lblNumberOfPersons.setVisible(false);
+
+        spnNumberOfPersons.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,500, 1));
+        spnNumberOfPersons.setVisible(false);
+
+        lblPersons.setVisible(false);
+        btnChoose.setVisible(false);
+
+        freePlaces = 0;
 
         Afmpz = new Railcar("27. Első Osztály / First Class",ClassType.PREMIUM, 16);
         AfmpzSecondPart = new Railcar("27. Első Osztály / First Class",ClassType.BUSINESS, 11);
@@ -91,28 +116,77 @@ public class MainPageController implements Initializable {
     @FXML
     public void LoadTrainData(){
 
-        for (Railcar railcar: Rjx162) {
-            chBoxTrainClass.getItems().add(railcar.getType());
-        }
+        chBoxTrainClass.setVisible(true);
 
+        for (Railcar railcar: Rjx162) {
+            chBoxTrainClass.getItems().add(railcar.getType()+" - "+railcar.getClassType().toString());
+        }
+        chBoxTrainClass.getSelectionModel().select(0);
+        lblCar.setVisible(true);
+        btnSelectedCar.setVisible(true);
 
 
     }
     @FXML
     public void NextStep(){
 
+        if(spnNumberOfPersons.getValue() > freePlaces){
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Figyelem!");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.setContentText("A kiválasztott kocsiban már nincsen elegendő hely "+String.valueOf(spnNumberOfPersons.getValue())+" fő részére! / Ez sind nicht genügend freie Plätze für "+String.valueOf(spnNumberOfPersons.getValue())+" Personen!");
+            alert.show();
+        }
+        else{
+            NewWindowOpening();
+        }
+
 
     }
+
+    private void NewWindowOpening() {
+
+        
+
+    }
+
     @FXML
-    public void ChooseTrainData(){
+    public void ShowFreePlaceNumber(){
+
+        lblFreePlaces.setVisible(true);
 
         for (Railcar railcar: Rjx162) {
-            if(chBoxTrainClass.getValue().equals(railcar.getType())){
-                lblClassType.setText(railcar.getClassType().toString());
-                int freePlaces = railcar.getMaxSeatsNumber() - railcar.getReservedSeatsNumber();
-                lblFreePlaces.setText(String.valueOf(freePlaces));
+            if(chBoxTrainClass.getValue().equals(railcar.getType()+" - "+railcar.getClassType().toString())){
+                freePlaces = railcar.getMaxSeatsNumber() - railcar.getReservedSeatsNumber();
+                lblShowFreePlaces.setText(String.valueOf(freePlaces));
+                if(freePlaces == 0){
+                    WarningThatNoFreePlaces();
+                }
             }
         }
+        lblNumberOfPersons.setVisible(true);
+        spnNumberOfPersons.setVisible(true);
+        spnNumberOfPersons.setEditable(true);
+        lblPersons.setVisible(true);
+        btnChoose.setVisible(true);
+
+    }
+    
+    private void WarningThatNoFreePlaces(){
+
+        alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Figyelem!");
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.setContentText("A kiválasztott kocsiban nincsen már szabad helye! / Keine freie Plätze mehr in dem ausgewählten Wagen!");
+        alert.show();
+
+        
+    }
+
+    @FXML
+    void ClearFreePlaceLabel() {
+
+        lblShowFreePlaces.setText("");
 
     }
 }

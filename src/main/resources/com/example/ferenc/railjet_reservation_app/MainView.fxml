@@ -27,29 +27,29 @@
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="chBoxTrainClass" layoutX="25.0" layoutY="200.0" onMouseClicked="#ChooseTrainData" prefHeight="25.0" prefWidth="203.0" />
-      <Label layoutX="73.0" layoutY="168.0" style="-fx-background-color: #E5E5E5;" text="Kocsi / Wagen" textAlignment="CENTER" textFill="#fd1212">
+      <ChoiceBox fx:id="chBoxTrainClass" layoutX="25.0" layoutY="200.0" onMouseClicked="#ClearFreePlaceLabel" prefHeight="25.0" prefWidth="203.0" />
+      <Label fx:id="lblCar" layoutX="73.0" layoutY="168.0" style="-fx-background-color: #E5E5E5;" text="Kocsi / Wagen" textAlignment="CENTER" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <Spinner fx:id="chBoxNumberOfPersons" editable="true" layoutX="341.0" layoutY="85.0" prefHeight="25.0" prefWidth="104.0" />
-      <Label layoutX="25.0" layoutY="286.0" style="-fx-background-color: #E5E5E5;" text="Szabad helyek / Freie Plätze:" textAlignment="CENTER" textFill="#fd1212">
+      <Spinner fx:id="spnNumberOfPersons" editable="true" layoutX="341.0" layoutY="85.0" prefHeight="25.0" prefWidth="104.0" />
+      <Label fx:id="lblFreePlaces" layoutX="25.0" layoutY="286.0" style="-fx-background-color: #E5E5E5;" text="Szabad helyek / Freie Plätze:" textAlignment="CENTER" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="291.0" layoutY="57.0" style="-fx-background-color: #E5E5E5;" text="Utasok száma / Anzahl der Reisenden:" textAlignment="CENTER" textFill="#fd1212">
+      <Label fx:id="lblNumberOfPersons" layoutX="291.0" layoutY="57.0" style="-fx-background-color: #E5E5E5;" text="Utasok száma / Anzahl der Reisenden:" textAlignment="CENTER" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="445.0" layoutY="89.0" style="-fx-background-color: #E5E5E5;" text="Fő / Personen" textAlignment="CENTER" textFill="#fd1212">
+      <Label fx:id="lblPersons" layoutX="445.0" layoutY="89.0" style="-fx-background-color: #E5E5E5;" text="Fő / Personen" textAlignment="CENTER" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblFreePlaces" layoutX="118.0" layoutY="316.0" prefHeight="18.0" prefWidth="0.0" style="-fx-background-color: #E5E5E5;" textAlignment="CENTER" textFill="#fd1212" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+      <Label fx:id="lblShowFreePlaces" layoutX="118.0" layoutY="316.0" style="-fx-background-color: #E5E5E5;" textAlignment="CENTER" textFill="#fd1212" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
@@ -60,11 +60,7 @@
             <Font name="Segoe UI Black Italic" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnChoose" layoutX="365.0" layoutY="282.0" mnemonicParsing="false" onAction="#NextStep" text="Tovább / Weiter" />
-      <Label fx:id="lblClassType" layoutX="67.0" layoutY="244.0" style="-fx-background-color: #E5E5E5;" textAlignment="CENTER" textFill="#fd1212" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
-         <font>
-            <Font name="Segoe UI Bold" size="14.0" />
-         </font>
-      </Label>
+      <Button fx:id="btnChoose" layoutX="342.0" layoutY="200.0" mnemonicParsing="false" onAction="#NextStep" text="Tovább / Weiter" />
+      <Button fx:id="btnSelectedCar" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#ShowFreePlaceNumber" text="Kiválaszt / Auswählen" />
    </children>
 </AnchorPane>
