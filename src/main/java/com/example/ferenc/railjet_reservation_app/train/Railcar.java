@@ -41,7 +41,7 @@ public class Railcar {
 
     public void setReservedSeatNumberAndSeat(Seat seat) {
 
-        this.reservedSeatsNumber++;
+        this.reservedSeatsNumber += seat.getNumberOfPersons();
 
         if(this.reservedSeatsNumber < this.maxSeatsNumber){
 

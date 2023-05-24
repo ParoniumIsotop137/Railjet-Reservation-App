@@ -15,13 +15,13 @@ public class RailcarTest {
 
         Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
 
-        Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM);
+        Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM, 1);
 
-        Seat testSeat2 = new Seat(RJX162Stations.MOSONMAGYAROVAR, RJX162Stations.SALZBURG);
+        Seat testSeat2 = new Seat(RJX162Stations.MOSONMAGYAROVAR, RJX162Stations.SALZBURG,1);
 
-        Seat testSeat3 = new Seat(RJX162Stations.GYOR, RJX162Stations.SALZBURG);
+        Seat testSeat3 = new Seat(RJX162Stations.GYOR, RJX162Stations.SALZBURG, 1);
 
-        Seat testSeat4 = new Seat(RJX162Stations.SALZBURG, RJX162Stations.LANDECK);
+        Seat testSeat4 = new Seat(RJX162Stations.SALZBURG, RJX162Stations.LANDECK, 1);
 
         testCar.setReservedSeatNumberAndSeat(testSeat);
         testCar.setReservedSeatNumberAndSeat(testSeat2);
@@ -37,13 +37,13 @@ public class RailcarTest {
 
         Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
 
-        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM);
+        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM, 1);
 
-        Seat testSeat2 = new Seat(RJX162Stations.MOSONMAGYAROVAR, RJX162Stations.SALZBURG);
+        Seat testSeat2 = new Seat(RJX162Stations.MOSONMAGYAROVAR, RJX162Stations.SALZBURG, 1);
 
-        Seat testSeat3 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR);
+        Seat testSeat3 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR, 1);
 
-        Seat testSeat4 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.ZURICH);
+        Seat testSeat4 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.ZURICH, 1);
 
         testCar.setReservedSeatNumberAndSeat(testSeat);
         testCar.setReservedSeatNumberAndSeat(testSeat2);
@@ -59,13 +59,13 @@ public class RailcarTest {
 
         Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
 
-        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM);
+        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM, 1);
 
-        Seat testSeat2 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.SALZBURG);
+        Seat testSeat2 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.SALZBURG, 1);
 
-        Seat testSeat3 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR);
+        Seat testSeat3 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR, 1);
 
-        Seat testSeat4 = new Seat(RJX162Stations.TATABANYA, RJX162Stations.GYOR);
+        Seat testSeat4 = new Seat(RJX162Stations.TATABANYA, RJX162Stations.GYOR, 1);
 
         testCar.setReservedSeatNumberAndSeat(testSeat);
         testCar.setReservedSeatNumberAndSeat(testSeat2);
@@ -80,13 +80,13 @@ public class RailcarTest {
 
         Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
 
-        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM);
+        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM, 1);
 
-        Seat testSeat2 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.SALZBURG);
+        Seat testSeat2 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.SALZBURG, 1);
 
-        Seat testSeat3 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.SALZBURG);
+        Seat testSeat3 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.SALZBURG, 1);
 
-        Seat testSeat4 = new Seat(RJX162Stations.WIENHBF, RJX162Stations.ZURICH);
+        Seat testSeat4 = new Seat(RJX162Stations.WIENHBF, RJX162Stations.ZURICH, 1);
 
         testCar.setReservedSeatNumberAndSeat(testSeat);
         testCar.setReservedSeatNumberAndSeat(testSeat2);

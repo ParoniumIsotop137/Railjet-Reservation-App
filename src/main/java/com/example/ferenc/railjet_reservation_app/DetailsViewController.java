@@ -4,6 +4,7 @@ import com.example.ferenc.railjet_reservation_app.train.Seat;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.Region;
@@ -15,6 +16,12 @@ public class DetailsViewController implements Initializable {
 
     @FXML
     private Spinner<Integer> spnNumberOfPersons;
+
+    @FXML
+    private ChoiceBox<String> startStations;
+
+    @FXML
+    private ChoiceBox<String> endStations;
     private Alert alert;
 
     private Seat seat;
