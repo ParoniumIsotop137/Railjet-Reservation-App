@@ -4,13 +4,19 @@ import com.example.ferenc.railjet_reservation_app.train.ClassType;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +126,24 @@ public class MainPageController implements Initializable {
 
     private void NewWindowOpening() {
 
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(getClass().getResource("NewWindowForDetails.fxml"));
+
+            Stage secondStage = new Stage();
+            secondStage.setScene(new Scene(root));
+            secondStage.setTitle("Helyfoglalás / Platzreservierung");
+            secondStage.initModality(Modality.APPLICATION_MODAL);
+            secondStage.show();
+
+        } catch (IOException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setContentText("Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
 
     }
 
