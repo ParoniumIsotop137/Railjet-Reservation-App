@@ -11,14 +11,12 @@ public class Seat {
 
     private boolean isReserved;
 
-    public int getNumberOfPersons() {
-        return numberOfPersons;
-    }
+
 
     public Seat(RJX162Stations startStation, RJX162Stations endStation, int numberOfPersons) {
         this.startStation = startStation;
         this.endStation = endStation;
-        this.numberOfPersons = 0;
+        this.numberOfPersons = numberOfPersons;
         this.isReserved = true;
     }
 
@@ -40,6 +38,10 @@ public class Seat {
 
     public void setReserved(boolean reserved) {
         isReserved = reserved;
+    }
+
+    public int getNumberOfPersons() {
+        return numberOfPersons;
     }
 
     public void setStartStation(RJX162Stations startStation) {

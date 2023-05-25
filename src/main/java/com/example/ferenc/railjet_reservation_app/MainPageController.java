@@ -48,8 +48,8 @@ public class MainPageController implements Initializable {
     private Label lblCar;
     @FXML
     private AnchorPane mainAnchorPane;
-
-
+    @FXML
+    private Button btnBuying;
     private Railcar Afmpz;
     private Railcar AfmpzSecondPart;
     private Railcar Ampz;
@@ -81,6 +81,7 @@ public class MainPageController implements Initializable {
         lblCar.setVisible(false);
         chBoxTrainClass.setVisible(false);
         btnSelectedCar.setVisible(false);
+        btnBuying.setVisible(false);
 
         btnChoose.setVisible(false);
 
@@ -141,8 +142,8 @@ public class MainPageController implements Initializable {
             secondStage.initModality(Modality.APPLICATION_MODAL);
             secondStage.show();
 
-            secondStage.setOnCloseRequest(event -> AddSeatToTrain());
-
+            btnBuying.setVisible(true);
+            btnChoose.setVisible(false);
 
         } catch (IOException e) {
             alert = new Alert(Alert.AlertType.ERROR);
@@ -153,32 +154,29 @@ public class MainPageController implements Initializable {
         }
 
     }
-
+    @FXML
     private void AddSeatToTrain() {
 
         seat = data.getSeat();
-
         alert = new Alert(Alert.AlertType.WARNING);
-        try{
+
             for (Railcar train : Rjx162) {
-                if(chBoxTrainClass.getValue().contains(train.getCarNumber())){
-
-                    System.out.println(train.getCarNumber());
-                    train.setReservedSeatNumberAndSeat(seat);
-
+                if (chBoxTrainClass.getValue().contains(train.getCarNumber())) {
+                    try {
+                        train.setReservedSeatNumberAndSeat(seat);
+                    } catch (IllegalArgumentException e) {
+                        alert.setContentText(e.getMessage());
+                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        alert.show();
+                    } catch (Exception e) {
+                        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                        errorAlert.setContentText(e.getMessage());
+                        errorAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        errorAlert.show();
+                    }
                 }
-            }
-        } catch (IllegalArgumentException e){
-            alert.setContentText(e.getMessage());
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
-        } catch (Exception e){
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setContentText(e.getMessage());
-            errorAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            errorAlert.show();
-        }
 
+            }
 
 
     }

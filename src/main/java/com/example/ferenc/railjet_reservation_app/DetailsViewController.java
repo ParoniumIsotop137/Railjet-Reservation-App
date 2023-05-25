@@ -3,6 +3,8 @@ package com.example.ferenc.railjet_reservation_app;
 import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
 import com.example.ferenc.railjet_reservation_app.routes.RJX162Stations;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,9 +45,12 @@ public class DetailsViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        spnNumberOfPersons.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,500, 1));
+
+        spnNumberOfPersons.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100, 1));
+
         stations = new ArrayList<String>();
         Arrays.stream(RJX162Stations.values()).forEach(e -> stations.add(e.getName()));
+
         startStations.getItems().setAll(stations);
         startStations.getSelectionModel().select(0);
         endStations.getItems().setAll(stations);
@@ -60,10 +65,10 @@ public class DetailsViewController implements Initializable {
 
         if(!startStations.getValue().equals(endStations.getValue())){
 
-            int value = spnNumberOfPersons.valueProperty().getValue();
+
             //spinner nem működik
 
-            seat = new Seat(RJX162Stations.getStation(startStations.getValue()), RJX162Stations.getStation(endStations.getValue()), value);
+            seat = new Seat(RJX162Stations.getStation(startStations.getValue()), RJX162Stations.getStation(endStations.getValue()), spnNumberOfPersons.getValue());
 
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Megerősítés / Bestätigung");

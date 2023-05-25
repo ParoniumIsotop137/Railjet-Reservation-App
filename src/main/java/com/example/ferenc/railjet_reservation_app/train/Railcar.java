@@ -47,7 +47,12 @@ public class Railcar {
 
     public void setReservedSeatNumberAndSeat(Seat seat) {
 
-        this.reservedSeatsNumber += seat.getNumberOfPersons();
+        if(seat.getNumberOfPersons() > this.maxSeatsNumber){
+            throw new IllegalArgumentException("A kiválasztott kocsiban nincsen elegendő szabad hely! / In diesem Wagen sind nicht genug Plätze verfügbar für so viele Personen!");
+        }
+        else{
+            this.reservedSeatsNumber += seat.getNumberOfPersons();
+        }
 
         if(this.reservedSeatsNumber < this.maxSeatsNumber){
 
@@ -71,7 +76,7 @@ public class Railcar {
             addNewSeatToList(seat);
             }
          else{
-             throw new IllegalArgumentException("A kiválasztott kocsiban már nincsen szabad hely!");
+             throw new IllegalArgumentException("A kiválasztott kocsiban már nincsen szabad hely! / Es sind keine freie Plätze mehr in dem ausgewählten Wagen!");
          }
 
     }

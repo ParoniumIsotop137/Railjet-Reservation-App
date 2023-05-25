@@ -45,5 +45,6 @@
       <Button fx:id="btnSelectedTrain" layoutX="56.0" layoutY="131.0" mnemonicParsing="false" onAction="#LoadTrainData" text="Kiválaszt / Auswählen" />
       <Button fx:id="btnChoose" layoutX="328.0" layoutY="164.0" mnemonicParsing="false" onAction="#NextStep" text="Tovább / Weiter" />
       <Button fx:id="btnSelectedCar" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#ShowFreePlaceNumber" text="Kiválaszt / Auswählen" />
+      <Button fx:id="btnBuying" layoutX="329.0" layoutY="242.0" mnemonicParsing="false" onAction="#AddSeatToTrain" text="Vásárlás / Kaufen" />
    </children>
 </AnchorPane>
