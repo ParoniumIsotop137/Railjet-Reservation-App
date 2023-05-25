@@ -1,5 +1,6 @@
 package com.example.ferenc.railjet_reservation_app;
 
+import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
 import com.example.ferenc.railjet_reservation_app.train.ClassType;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
@@ -61,10 +62,14 @@ public class MainPageController implements Initializable {
 
     private Railcar Bmpvz;
 
-    private static List<Railcar> Rjx162;
-
+    private final List<Railcar> Rjx162 = new ArrayList<Railcar>();
     private Alert alert;
     private int freePlaces;
+
+    private Seat seat;
+
+    private DataSingeleton data;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -81,16 +86,15 @@ public class MainPageController implements Initializable {
 
         freePlaces = 0;
 
-        Afmpz = new Railcar("27. Első Osztály / First Class",ClassType.PREMIUM, 16);
-        AfmpzSecondPart = new Railcar("27. Első Osztály / First Class",ClassType.BUSINESS, 11);
-        Ampz = new Railcar("26. Első Osztály / First Class",ClassType.BUSINESS, 55);
-        ARbmpz = new Railcar("25. Első Osztály (Étkezőkocsi)/ First Class (Restaurant)",ClassType.BUSINESS, 10);
-        Bmpz_1 = new Railcar("24. Másodsztály / Second Class",ClassType.ECONOMY, 80);
-        Bmpz_2 = new Railcar("23. Másodsztály / Second Class",ClassType.ECONOMY, 76);
-        Bmpz_3 = new Railcar("22. Másodsztály / Second Class",ClassType.ECONOMY, 80);
-        Bmpvz= new Railcar("21. Másodsztály / Second Class",ClassType.ECONOMY, 72);
+        Afmpz = new Railcar("27/1.","Első Osztály / First Class",ClassType.PREMIUM, 16);
+        AfmpzSecondPart = new Railcar("27/2.","Első Osztály / First Class",ClassType.BUSINESS, 11);
+        Ampz = new Railcar("26.","Első Osztály / First Class",ClassType.BUSINESS, 55);
+        ARbmpz = new Railcar("25.","Első Osztály (Étkezőkocsi)/ First Class (Restaurant)",ClassType.BUSINESS, 10);
+        Bmpz_1 = new Railcar("24.","Másodsztály / Second Class",ClassType.ECONOMY, 80);
+        Bmpz_2 = new Railcar("23.","Másodsztály / Second Class",ClassType.ECONOMY, 76);
+        Bmpz_3 = new Railcar("22.","Másodsztály / Second Class",ClassType.ECONOMY, 80);
+        Bmpvz= new Railcar("21.","Másodsztály / Second Class",ClassType.ECONOMY, 72);
 
-        Rjx162 = new ArrayList<Railcar>();
 
         Rjx162.add(Afmpz);
         Rjx162.add(AfmpzSecondPart);
@@ -101,6 +105,7 @@ public class MainPageController implements Initializable {
         Rjx162.add(Bmpz_3);
         Rjx162.add(Bmpvz);
 
+        data = DataSingeleton.getInstance();
 
     }
     @FXML
@@ -109,7 +114,7 @@ public class MainPageController implements Initializable {
         chBoxTrainClass.setVisible(true);
 
         for (Railcar railcar: Rjx162) {
-            chBoxTrainClass.getItems().add(railcar.getType()+" - "+railcar.getClassType().toString());
+            chBoxTrainClass.getItems().add(railcar.getCarNumber()+" "+railcar.getType()+" - "+railcar.getClassType().toString());
         }
         chBoxTrainClass.getSelectionModel().select(0);
         lblCar.setVisible(true);
@@ -130,12 +135,14 @@ public class MainPageController implements Initializable {
 
         try {
             root = FXMLLoader.load(getClass().getResource("NewWindowForDetails.fxml"));
-
             Stage secondStage = new Stage();
             secondStage.setScene(new Scene(root));
             secondStage.setTitle("Helyfoglalás / Platzreservierung");
             secondStage.initModality(Modality.APPLICATION_MODAL);
             secondStage.show();
+
+            secondStage.setOnCloseRequest(event -> AddSeatToTrain());
+
 
         } catch (IOException e) {
             alert = new Alert(Alert.AlertType.ERROR);
@@ -147,13 +154,42 @@ public class MainPageController implements Initializable {
 
     }
 
+    private void AddSeatToTrain() {
+
+        seat = data.getSeat();
+
+        alert = new Alert(Alert.AlertType.WARNING);
+        try{
+            for (Railcar train : Rjx162) {
+                if(chBoxTrainClass.getValue().contains(train.getCarNumber())){
+
+                    System.out.println(train.getCarNumber());
+                    train.setReservedSeatNumberAndSeat(seat);
+
+                }
+            }
+        } catch (IllegalArgumentException e){
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        } catch (Exception e){
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setContentText(e.getMessage());
+            errorAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            errorAlert.show();
+        }
+
+
+
+    }
+
     @FXML
     public void ShowFreePlaceNumber(){
 
         lblFreePlaces.setVisible(true);
 
         for (Railcar railcar: Rjx162) {
-            if(chBoxTrainClass.getValue().equals(railcar.getType()+" - "+railcar.getClassType().toString())){
+            if(chBoxTrainClass.getValue().contains(railcar.getCarNumber())){
                 freePlaces = railcar.getMaxSeatsNumber() - railcar.getReservedSeatsNumber();
                 lblShowFreePlaces.setText(String.valueOf(freePlaces));
                 if(freePlaces == 0){

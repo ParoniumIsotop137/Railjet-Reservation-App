@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Railcar {
 
+    private String carNumber;
     private String type;
     private ClassType classType;
     private int maxSeatsNumber;
@@ -14,16 +15,21 @@ public class Railcar {
     private List<Seat> seats;
 
 
-    public Railcar(String type, ClassType classType, int maxSeatNumber) {
+    public Railcar(String carNumber,String type, ClassType classType, int maxSeatNumber) {
         this.type = type;
         this.classType = classType;
         this.maxSeatsNumber = maxSeatNumber;
         this.reservedSeatsNumber = 0;
         this.seats = new ArrayList<Seat>();
+        this.carNumber = carNumber;
     }
 
     public String getType() {
         return type;
+    }
+
+    public String getCarNumber() {
+        return carNumber;
     }
 
     public ClassType getClassType() {

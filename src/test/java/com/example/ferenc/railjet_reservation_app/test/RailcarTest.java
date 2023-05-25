@@ -13,7 +13,7 @@ public class RailcarTest {
     @Test
     void setFreeSeatNumberAndSeatTest(){
 
-        Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
+        Railcar testCar = new Railcar("","Afpmz First Class", ClassType.PREMIUM, 3);
 
         Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM, 1);
 
@@ -35,7 +35,7 @@ public class RailcarTest {
     @Test
     void setFreeSeatNumberAndSeatTest2(){
 
-        Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
+        Railcar testCar = new Railcar("","Afpmz First Class", ClassType.PREMIUM, 3);
 
         Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM, 1);
 
@@ -57,7 +57,7 @@ public class RailcarTest {
     @Test
     void setFreeSeatNumberAndSeatTest3(){
 
-        Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
+        Railcar testCar = new Railcar("","Afpmz First Class", ClassType.PREMIUM, 3);
 
         Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM, 1);
 
@@ -78,7 +78,7 @@ public class RailcarTest {
     @Test
     void setFreeSeatNumberAndSeatTest4(){
 
-        Railcar testCar = new Railcar("Afpmz First Class", ClassType.PREMIUM, 3);
+        Railcar testCar = new Railcar("","Afpmz First Class", ClassType.PREMIUM, 3);
 
         Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.HEGYESHALOM, 1);
 

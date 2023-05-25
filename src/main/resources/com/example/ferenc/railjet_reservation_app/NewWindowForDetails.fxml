@@ -44,7 +44,7 @@
       </Label>
       <ComboBox fx:id="startStations" layoutX="207.0" layoutY="136.0" prefHeight="27.0" prefWidth="192.0" />
       <ComboBox fx:id="endStations" layoutX="207.0" layoutY="176.0" prefHeight="27.0" prefWidth="192.0" />
-      <Button fx:id="btnCancel" layoutX="37.0" layoutY="234.0" mnemonicParsing="false" text="Mégsem / Abbrechen" textAlignment="CENTER" />
-      <Button fx:id="btnReservation" layoutX="225.0" layoutY="234.0" mnemonicParsing="false" text="Foglalás / Reservieren" textAlignment="CENTER" />
+      <Button fx:id="btnCancel" layoutX="37.0" layoutY="234.0" mnemonicParsing="false" onAction="#Closing" text="Mégsem / Abbrechen" textAlignment="CENTER" />
+      <Button fx:id="btnReservation" layoutX="225.0" layoutY="234.0" mnemonicParsing="false" onAction="#CheckStatus" text="Foglalás / Reservieren" textAlignment="CENTER" />
    </children>
 </AnchorPane>
