@@ -9,4 +9,6 @@ module com.example.ferenc.railjet_reservation_app {
 
     opens com.example.ferenc.railjet_reservation_app to javafx.fxml;
     exports com.example.ferenc.railjet_reservation_app;
+    exports com.example.ferenc.railjet_reservation_app.dataholder;
+    opens com.example.ferenc.railjet_reservation_app.dataholder to javafx.fxml;
 }

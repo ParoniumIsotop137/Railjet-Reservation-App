@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Railcar {
 
+    private String carNumber;
     private String type;
     private ClassType classType;
     private int maxSeatsNumber;
@@ -14,16 +15,21 @@ public class Railcar {
     private List<Seat> seats;
 
 
-    public Railcar(String type, ClassType classType, int maxSeatNumber) {
+    public Railcar(String carNumber,String type, ClassType classType, int maxSeatNumber) {
         this.type = type;
         this.classType = classType;
         this.maxSeatsNumber = maxSeatNumber;
         this.reservedSeatsNumber = 0;
         this.seats = new ArrayList<Seat>();
+        this.carNumber = carNumber;
     }
 
     public String getType() {
         return type;
+    }
+
+    public String getCarNumber() {
+        return carNumber;
     }
 
     public ClassType getClassType() {
@@ -41,7 +47,12 @@ public class Railcar {
 
     public void setReservedSeatNumberAndSeat(Seat seat) {
 
-        this.reservedSeatsNumber++;
+        if(seat.getNumberOfPersons() > this.maxSeatsNumber){
+            throw new IllegalArgumentException("A kiválasztott kocsiban nincsen elegendő szabad hely! / In diesem Wagen sind nicht genug Plätze verfügbar für so viele Personen!");
+        }
+        else{
+            this.reservedSeatsNumber += seat.getNumberOfPersons();
+        }
 
         if(this.reservedSeatsNumber < this.maxSeatsNumber){
 
@@ -65,7 +76,7 @@ public class Railcar {
             addNewSeatToList(seat);
             }
          else{
-             throw new IllegalArgumentException("A kiválasztott kocsiban már nincsen szabad hely!");
+             throw new IllegalArgumentException("A kiválasztott kocsiban már nincsen szabad hely! / Es sind keine freie Plätze mehr in dem ausgewählten Wagen!");
          }
 
     }
