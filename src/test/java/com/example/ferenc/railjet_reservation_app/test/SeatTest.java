@@ -45,7 +45,7 @@ public class SeatTest {
         Seat testSeat2 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR, 1);
 
         testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
-        assertTrue(testSeat.isReserved());
+        assertFalse(testSeat.isReserved());
     }
 
 }

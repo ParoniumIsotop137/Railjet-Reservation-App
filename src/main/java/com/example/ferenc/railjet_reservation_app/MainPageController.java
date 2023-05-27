@@ -158,18 +158,21 @@ public class MainPageController implements Initializable {
     private void AddSeatToTrain() {
 
         seat = data.getSeat();
-        alert = new Alert(Alert.AlertType.WARNING);
 
             for (Railcar train : Rjx162) {
                 if (chBoxTrainClass.getValue().contains(train.getCarNumber())) {
                     try {
                         train.setReservedSeatNumberAndSeat(seat);
+                        SendMessage();
                     } catch (IllegalArgumentException e) {
+                        alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Figyelmeztetés! / Warnung!");
                         alert.setContentText(e.getMessage());
                         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                         alert.show();
                     } catch (Exception e) {
                         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Hiba! / Fehler");
                         errorAlert.setContentText(e.getMessage());
                         errorAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                         errorAlert.show();
@@ -178,6 +181,14 @@ public class MainPageController implements Initializable {
 
             }
 
+    }
+
+    private void SendMessage() {
+
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Iformáció");
+        alert.setContentText("Sikeres ülőhelyfoglalás! / Sitzplatzreservierung erfolgreich!");
+        alert.show();
 
     }
 

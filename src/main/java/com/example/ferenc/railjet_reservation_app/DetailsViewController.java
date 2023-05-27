@@ -66,8 +66,6 @@ public class DetailsViewController implements Initializable {
         if(!startStations.getValue().equals(endStations.getValue())){
 
 
-            //spinner nem működik
-
             seat = new Seat(RJX162Stations.getStation(startStations.getValue()), RJX162Stations.getStation(endStations.getValue()), spnNumberOfPersons.getValue());
 
             alert = new Alert(Alert.AlertType.INFORMATION);
