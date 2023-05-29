@@ -39,10 +39,7 @@ public class MainPageController implements Initializable {
     @FXML
     private ChoiceBox<String> chBoxTrainNumber;
 
-    @FXML
-    private Label lblFreePlaces;
-    @FXML
-    private Label lblShowFreePlaces;
+
 
     @FXML
     private Label lblCar;
@@ -77,7 +74,6 @@ public class MainPageController implements Initializable {
         chBoxTrainNumber.getItems().add("RJX162");
         chBoxTrainNumber.getSelectionModel().select(0);
 
-        lblFreePlaces.setVisible(false);
         lblCar.setVisible(false);
         chBoxTrainClass.setVisible(false);
         btnSelectedCar.setVisible(false);
@@ -193,19 +189,9 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void ShowFreePlaceNumber(){
+    public void SelectCar(){
 
-        lblFreePlaces.setVisible(true);
 
-        for (Railcar railcar: Rjx162) {
-            if(chBoxTrainClass.getValue().contains(railcar.getCarNumber())){
-                freePlaces = railcar.getMaxSeatsNumber() - railcar.getReservedSeatsNumber();
-                lblShowFreePlaces.setText(String.valueOf(freePlaces));
-                if(freePlaces == 0){
-                    WarningThatNoFreePlaces();
-                }
-            }
-        }
         btnChoose.setVisible(true);
 
     }
@@ -221,10 +207,4 @@ public class MainPageController implements Initializable {
         
     }
 
-    @FXML
-    void ClearFreePlaceLabel() {
-
-        lblShowFreePlaces.setText("");
-
-    }
 }
