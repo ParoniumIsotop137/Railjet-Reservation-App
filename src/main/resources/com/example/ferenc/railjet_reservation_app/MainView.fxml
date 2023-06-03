@@ -33,8 +33,8 @@
          </font>
       </Label>
       <Button fx:id="btnSelectedTrain" layoutX="56.0" layoutY="131.0" mnemonicParsing="false" onAction="#LoadTrainData" text="Kiválaszt / Auswählen" />
-      <Button fx:id="btnChoose" layoutX="341.0" layoutY="85.0" mnemonicParsing="false" onAction="#NextStep" text="Tovább / Weiter" />
-      <Button fx:id="btnSelectedCar" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#SelectCar" text="Kiválaszt / Auswählen" />
-      <Button fx:id="btnBuying" layoutX="338.0" layoutY="131.0" mnemonicParsing="false" onAction="#AddSeatToTrain" text="Vásárlás / Kaufen" />
+      <Button fx:id="btnChoose" layoutX="341.0" layoutY="85.0" mnemonicParsing="false" text="Fizetés / Zahlung" />
+      <Button fx:id="btnSelectedCar" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#NextStep" text="Kiválaszt / Auswählen" />
+      <Button fx:id="btnShoppingCart" layoutX="336.0" layoutY="155.0" mnemonicParsing="false" onMouseClicked="#showShoppingCart" text="Kosár / Warenkorb" />
    </children>
 </AnchorPane>
