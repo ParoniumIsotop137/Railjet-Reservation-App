@@ -50,7 +50,9 @@ public class Seat {
 
     public void checkIfSeatFree(RJX162Stations startStation, RJX162Stations endStation){
 
-        if(this.startStation.getId() > endStation.getId()){
+        if(this.endStation.getId() < startStation.getId()) {
+            this.setReserved(false);
+        } else if (this.startStation.getId() > endStation.getId()) {
             this.setReserved(false);
         } else if (this.startStation.getId() < startStation.getId() && this.endStation.getId() < endStation.getId()) {
             this.setReserved(false);

@@ -47,16 +47,11 @@ public class Railcar {
 
     public void setReservedSeatNumberAndSeat(Seat seat) {
 
-        if(seat.getNumberOfPersons() > this.maxSeatsNumber || this.reservedSeatsNumber >= this.maxSeatsNumber){
-            throw new IllegalArgumentException("A kiválasztott kocsiban nincsen elegendő szabad hely! / In diesem Wagen sind nicht genug Plätze verfügbar für so viele Personen!");
-        }
-        else if(this.reservedSeatsNumber < this.maxSeatsNumber){
+        if(seat.getNumberOfPersons() > this.maxSeatsNumber || this.reservedSeatsNumber >= this.maxSeatsNumber) {
+            CheckSeatReservation(seat);
+        }else if(this.reservedSeatsNumber < this.maxSeatsNumber){
             this.reservedSeatsNumber += seat.getNumberOfPersons();
             addNewSeatToList(seat);
-        }
-        else{
-            CheckSeatReservation(seat);
-
         }
 
     }
