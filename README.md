@@ -1,5 +1,5 @@
 # Railjet-Reservation-App
-JavaFX ülőhely foglaló alkalmazás
+JavaFX ülőhely foglaló alkalmazás (JavaFX 19.0.2.1)
 
 Dokumentáció a vonat adatairól is lesz majd hozzá. / Dokumentation bezüglich Zugdaten folgt. / Documentation regarding train data follows.
 
