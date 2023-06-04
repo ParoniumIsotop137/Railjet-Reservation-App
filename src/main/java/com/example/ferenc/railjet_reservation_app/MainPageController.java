@@ -31,6 +31,8 @@ public class MainPageController implements Initializable {
     @FXML
     private Button btnSelectedTrain;
     @FXML
+    private Button btnShoppingCart;
+    @FXML
     private Button btnSelectedCar;
 
     @FXML
@@ -39,17 +41,12 @@ public class MainPageController implements Initializable {
     @FXML
     private ChoiceBox<String> chBoxTrainNumber;
 
-    @FXML
-    private Label lblFreePlaces;
-    @FXML
-    private Label lblShowFreePlaces;
+
 
     @FXML
     private Label lblCar;
     @FXML
     private AnchorPane mainAnchorPane;
-    @FXML
-    private Button btnBuying;
     private Railcar Afmpz;
     private Railcar AfmpzSecondPart;
     private Railcar Ampz;
@@ -64,11 +61,34 @@ public class MainPageController implements Initializable {
 
     private final List<Railcar> Rjx162 = new ArrayList<Railcar>();
     private Alert alert;
-    private int freePlaces;
 
     private Seat seat;
 
     private DataSingeleton data;
+
+    @FXML
+    private MenuItem mniDbHun;
+
+    @FXML
+    private MenuItem mniMavHu;
+
+    @FXML
+    private MenuItem mniObbHu;
+
+    @FXML
+    private MenuItem mniSbbHun;
+
+    @FXML
+    private MenuItem miniSbbDe;
+
+    @FXML
+    private MenuItem mniDbDe;
+
+    @FXML
+    private MenuItem mniMavDe;
+
+    @FXML
+    private MenuItem mniObbDe;
 
 
     @Override
@@ -77,16 +97,14 @@ public class MainPageController implements Initializable {
         chBoxTrainNumber.getItems().add("RJX162");
         chBoxTrainNumber.getSelectionModel().select(0);
 
-        lblFreePlaces.setVisible(false);
         lblCar.setVisible(false);
         chBoxTrainClass.setVisible(false);
         btnSelectedCar.setVisible(false);
-        btnBuying.setVisible(false);
-
+        btnShoppingCart.setVisible(false);
         btnChoose.setVisible(false);
+        btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
 
-        freePlaces = 0;
-
+        //a adatbázisból érkező adatok
         Afmpz = new Railcar("27/1.","Első Osztály / First Class",ClassType.PREMIUM, 16);
         AfmpzSecondPart = new Railcar("27/2.","Első Osztály / First Class",ClassType.BUSINESS, 11);
         Ampz = new Railcar("26.","Első Osztály / First Class",ClassType.BUSINESS, 55);
@@ -128,6 +146,7 @@ public class MainPageController implements Initializable {
 
         NewWindowOpening();
 
+
     }
 
     private void NewWindowOpening() {
@@ -142,89 +161,95 @@ public class MainPageController implements Initializable {
             secondStage.initModality(Modality.APPLICATION_MODAL);
             secondStage.show();
 
-            btnBuying.setVisible(true);
-            btnChoose.setVisible(false);
+
 
         } catch (IOException e) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
             alert.setContentText("Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!");
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }
+        btnChoose.setVisible(true);
+
 
     }
-    @FXML
+
     private void AddSeatToTrain() {
 
         seat = data.getSeat();
 
-            for (Railcar train : Rjx162) {
-                if (chBoxTrainClass.getValue().contains(train.getCarNumber())) {
-                    try {
-                        train.setReservedSeatNumberAndSeat(seat);
-                        SendMessage();
-                    } catch (IllegalArgumentException e) {
-                        alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Figyelmeztetés! / Warnung!");
-                        alert.setContentText(e.getMessage());
-                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                        alert.show();
-                    } catch (Exception e) {
-                        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Hiba! / Fehler");
-                        errorAlert.setContentText(e.getMessage());
-                        errorAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                        errorAlert.show();
-                    }
-                }
+        if(seat != null){
+            Reservation();
+            btnShoppingCart.setVisible(true);
+        }
+        else{
+            SendWarningMessage();
+            SetBackButton();
+        }
 
-            }
 
     }
+
+    private void SendWarningMessage() {
+
+        Alert wMessage = new Alert(Alert.AlertType.WARNING);
+        wMessage.setTitle("Információ / Information");
+        wMessage.setHeaderText("Nincsen még foglalása! / Sie haben noch keine Sitzplatzreservierung!");
+        wMessage.setContentText("Először foglaljon egy ülőhelyet! / Bitte zuerst einen Sitzplatz reservieren!");
+        wMessage.show();
+    }
+
+    private void SetBackButton() {
+
+        btnChoose.setVisible(false);
+
+
+    }
+
+    private void Reservation() {
+
+        for (Railcar train : Rjx162) {
+            if (chBoxTrainClass.getValue().contains(train.getCarNumber())) {
+                try {
+                    train.setReservedSeatNumberAndSeat(seat);
+                    SendMessage();
+                    SetBackButton();
+                } catch (IllegalArgumentException e) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Figyelmeztetés! / Warnung!");
+                    alert.setHeaderText("Sikertelen foglalás! / Sitzplatzreservierung war nicht erfolgreich!");
+                    alert.setContentText(e.getMessage());
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                    alert.show();
+                } catch (Exception e) {
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Hiba! / Fehler");
+                    errorAlert.setContentText(e.getMessage());
+                    errorAlert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
+                    errorAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                    errorAlert.show();
+                }
+            }
+
+        }
+        seat = null;
+    }
+
 
     private void SendMessage() {
 
-        alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Iformáció");
-        alert.setContentText("Sikeres ülőhelyfoglalás! / Sitzplatzreservierung erfolgreich!");
-        alert.show();
+        btnShoppingCart.setVisible(false);
+        Alert orderMessage = new Alert(Alert.AlertType.INFORMATION);
+        orderMessage.setTitle("Információ / Information");
+        orderMessage.setHeaderText("Megerősítés / Bestätigung");
+        orderMessage.setContentText("Sikeres ülőhelyfoglalás! / Sitzplatzreservierung erfolgreich!");
+        orderMessage.show();
 
     }
-
     @FXML
-    public void ShowFreePlaceNumber(){
-
-        lblFreePlaces.setVisible(true);
-
-        for (Railcar railcar: Rjx162) {
-            if(chBoxTrainClass.getValue().contains(railcar.getCarNumber())){
-                freePlaces = railcar.getMaxSeatsNumber() - railcar.getReservedSeatsNumber();
-                lblShowFreePlaces.setText(String.valueOf(freePlaces));
-                if(freePlaces == 0){
-                    WarningThatNoFreePlaces();
-                }
-            }
-        }
-        btnChoose.setVisible(true);
-
-    }
-    
-    private void WarningThatNoFreePlaces(){
-
-        alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Figyelem!");
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.setContentText("A kiválasztott kocsiban nincsen már szabad helye! / Keine freie Plätze mehr in dem ausgewählten Wagen!");
-        alert.show();
-
-        
-    }
-
-    @FXML
-    void ClearFreePlaceLabel() {
-
-        lblShowFreePlaces.setText("");
+    private void showShoppingCart(){
 
     }
 }

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DetailsViewController implements Initializable {
@@ -84,6 +85,7 @@ public class DetailsViewController implements Initializable {
         else{
             alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Figyelmeztetés! / Warnung!");
+            alert.setHeaderText("Helytelen adatok! / Falsche Angaben!");
             alert.setContentText("Válasszon másik célállomást! / Wählen Sie einen anderen Zielbahnhof aus!");
             endStations.getSelectionModel().select(0);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
@@ -95,7 +97,21 @@ public class DetailsViewController implements Initializable {
     @FXML
     public void Closing(ActionEvent event){
 
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Megerősítés / Bestätigung");
+        alert.setHeaderText("Nem lesz lefoglalva egy ülőhely sem! / Sitzplatzreservierung wird unterbrochen!");
+        alert.setContentText("Biztosan kilép? / Wollen Sie wirklich beenden?");
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        ButtonType buttonTypeYes = new ButtonType("Igen, megszakítom / Ja, beenden");
+        ButtonType buttonTypeNo = new ButtonType("Vissza / Zurück");
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeYes){
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+        }
+
+
     }
 
     public Seat getSeat() {
