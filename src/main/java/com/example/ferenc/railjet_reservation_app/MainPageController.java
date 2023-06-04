@@ -61,11 +61,34 @@ public class MainPageController implements Initializable {
 
     private final List<Railcar> Rjx162 = new ArrayList<Railcar>();
     private Alert alert;
-    private int freePlaces;
 
     private Seat seat;
 
     private DataSingeleton data;
+
+    @FXML
+    private MenuItem mniDbHun;
+
+    @FXML
+    private MenuItem mniMavHu;
+
+    @FXML
+    private MenuItem mniObbHu;
+
+    @FXML
+    private MenuItem mniSbbHun;
+
+    @FXML
+    private MenuItem miniSbbDe;
+
+    @FXML
+    private MenuItem mniDbDe;
+
+    @FXML
+    private MenuItem mniMavDe;
+
+    @FXML
+    private MenuItem mniObbDe;
 
 
     @Override
@@ -81,7 +104,6 @@ public class MainPageController implements Initializable {
         btnChoose.setVisible(false);
         btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
 
-        freePlaces = 0;
         //a adatbázisból érkező adatok
         Afmpz = new Railcar("27/1.","Első Osztály / First Class",ClassType.PREMIUM, 16);
         AfmpzSecondPart = new Railcar("27/2.","Első Osztály / First Class",ClassType.BUSINESS, 11);

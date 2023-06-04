@@ -3,6 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,7 +18,7 @@
             <Image url="@../../../../pictures/railjet.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="94.0" layoutY="7.0" text="Üdvözöljük ülőhelyfoglaló alkalmazásunkban!" textFill="#fd1212">
+      <Label blendMode="MULTIPLY" layoutX="103.0" layoutY="26.0" text="Üdvözöljük ülőhelyfoglaló alkalmazásunkban!" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Black Italic" size="18.0" />
          </font>
@@ -36,5 +39,25 @@
       <Button fx:id="btnChoose" layoutX="341.0" layoutY="85.0" mnemonicParsing="false" text="Fizetés / Zahlung" />
       <Button fx:id="btnSelectedCar" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#NextStep" text="Kiválaszt / Auswählen" />
       <Button fx:id="btnShoppingCart" layoutX="336.0" layoutY="155.0" mnemonicParsing="false" onMouseClicked="#showShoppingCart" text="Kosár / Warenkorb" />
+      <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu fx:id="menuInfoHun" mnemonicParsing="false" text="Pályainformációk">
+               <items>
+                  <MenuItem fx:id="mniMavHu" mnemonicParsing="false" text="MÁV" />
+                  <MenuItem fx:id="mniObbHu" mnemonicParsing="false" text="ÖBB / Ausztria" />
+                  <MenuItem fx:id="mniDbHun" mnemonicParsing="false" text="DB / Németország" />
+                  <MenuItem fx:id="mniSbbHun" mnemonicParsing="false" text="SBB / Svájc" />
+               </items>
+          </Menu>
+          <Menu fx:id="menuInfoDe" mnemonicParsing="false" text="Streckeninformationen">
+               <items>
+                  <MenuItem fx:id="mniMavDe" mnemonicParsing="false" text="MÁV / Ungarn" />
+                  <MenuItem fx:id="mniObbDe" mnemonicParsing="false" text="ÖBB / Österreich" />
+                  <MenuItem fx:id="mniDbDe" mnemonicParsing="false" text="DB / Deutschland" />
+                  <MenuItem fx:id="miniSbbDe" mnemonicParsing="false" text="SBB / Schweiz" />
+               </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>
