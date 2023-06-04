@@ -49,7 +49,7 @@ public class Railcar {
 
         if(seat.getNumberOfPersons() > this.maxSeatsNumber || this.reservedSeatsNumber >= this.maxSeatsNumber) {
             CheckSeatReservation(seat);
-        }else if(this.reservedSeatsNumber < this.maxSeatsNumber){
+        }else if(this.reservedSeatsNumber <= this.maxSeatsNumber){
             this.reservedSeatsNumber += seat.getNumberOfPersons();
             addNewSeatToList(seat);
         }
