@@ -63,4 +63,10 @@ public class Seat {
 
     }
 
+    @Override
+    public String toString() {
+        return "Ülőhely / Stitzplatz von: "+ startStation.getName() +
+                "\nállomástól / bis: " + endStation.getName() +
+                "\nutasok száma / Personen: " + String.valueOf(numberOfPersons)+" fő\n";
+    }
 }
