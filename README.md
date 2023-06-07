@@ -1,6 +1,8 @@
 # Railjet-Reservation-App
 JavaFX ülőhely foglaló alkalmazás (JavaFX 19.0.2.1)
 
+(Számítógép csere 07/06/2023-10/06/2023)
+
 Dokumentáció a vonat adatairól is lesz majd hozzá. / Dokumentation bezüglich Zugdaten folgt. / Documentation regarding train data follows.
 
 
