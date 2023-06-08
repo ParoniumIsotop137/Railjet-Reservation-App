@@ -64,8 +64,6 @@ public class MainPageController implements Initializable {
 
     private Seat seat;
 
-    private DataSingeleton data;
-
     @FXML
     private MenuItem mniDbHun;
 
@@ -90,6 +88,9 @@ public class MainPageController implements Initializable {
     @FXML
     private MenuItem mniObbDe;
 
+    DataSingeleton data;
+
+    String ticket;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -103,6 +104,7 @@ public class MainPageController implements Initializable {
         btnShoppingCart.setVisible(false);
         btnChoose.setVisible(false);
         btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
+        ticket = "";
 
         //a adatbázisból érkező adatok
         Afmpz = new Railcar("27/1.","Első Osztály / First Class",ClassType.PREMIUM, 16);
@@ -234,7 +236,7 @@ public class MainPageController implements Initializable {
             }
 
         }
-        seat = null;
+
     }
 
 
@@ -250,6 +252,35 @@ public class MainPageController implements Initializable {
     }
     @FXML
     private void showShoppingCart(){
+
+        Parent root;
+        ticket = this.seat.toString();
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ShoppingCardView.fxml"));
+
+            root = loader.load();
+
+            ShoppingCardController scc = loader.getController();
+            scc.setTicket(ticket);
+            Stage secondStage = new Stage();
+            Scene scene = new Scene(root);
+            scene.setUserData(data.getSeat());
+            scene.getStylesheets().add("listview.css");
+            secondStage.setScene(scene);
+            secondStage.setTitle("Kosár tartalma / Tickets im Warenkorb");
+            secondStage.initModality(Modality.APPLICATION_MODAL);
+            secondStage.show();
+
+        } catch (IOException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
+            alert.setContentText(e.getMessage()+"Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+        this.seat =  null;
 
     }
 }

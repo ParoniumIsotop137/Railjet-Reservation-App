@@ -40,7 +40,7 @@ public class DetailsViewController implements Initializable {
 
     private Seat seat;
 
-    private DataSingeleton data;
+    DataSingeleton data;
 
 
     @Override
@@ -114,7 +114,4 @@ public class DetailsViewController implements Initializable {
 
     }
 
-    public Seat getSeat() {
-        return seat;
-    }
 }
