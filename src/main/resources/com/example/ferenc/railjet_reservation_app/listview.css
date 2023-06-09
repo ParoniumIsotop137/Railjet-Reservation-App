@@ -1,0 +1,16 @@
+#lstTickets {
+
+    -fx-background-color: #D6EAF8;
+    -fx-text-background-color: #1040B0;
+    -fx-font-family: "Lucida Handwriting";
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+
+
+}
+#btnTickets {
+
+    -fx-text-color: #ff1f2d;
+
+}

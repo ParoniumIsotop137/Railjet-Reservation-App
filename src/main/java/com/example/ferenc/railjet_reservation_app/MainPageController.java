@@ -255,18 +255,21 @@ public class MainPageController implements Initializable {
 
         Parent root;
         ticket = this.seat.toString();
+
+
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ShoppingCardView.fxml"));
-
             root = loader.load();
+
+            String css = this.getClass().getResource("listview.css").toExternalForm();
 
             ShoppingCardController scc = loader.getController();
             scc.setTicket(ticket);
             Stage secondStage = new Stage();
             Scene scene = new Scene(root);
             scene.setUserData(data.getSeat());
-            scene.getStylesheets().add("listview.css");
+            scene.getStylesheets().add(css);
             secondStage.setScene(scene);
             secondStage.setTitle("Kosár tartalma / Tickets im Warenkorb");
             secondStage.initModality(Modality.APPLICATION_MODAL);
@@ -280,7 +283,5 @@ public class MainPageController implements Initializable {
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }
-        this.seat =  null;
-
     }
 }

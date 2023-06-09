@@ -38,16 +38,19 @@ public class ShoppingCardController implements Initializable {
         listItems = FXCollections.observableArrayList();
 
         lstTickets.setItems(listItems);
+
     }
 
     @FXML
     public void FillTheListView(ActionEvent event) {
 
         tickets.add(getTicket());
-
+        int n = 1;
         for (String ticket : tickets){
-            listItems.add(ticket);
+            listItems.add(String.valueOf(n)+". "+ticket);
+            n++;
         }
+        btnTickets.setDisable(true);
     }
 
     public String getTicket() {
