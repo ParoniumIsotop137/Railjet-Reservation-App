@@ -1,6 +1,7 @@
 package com.example.ferenc.railjet_reservation_app;
 
 import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
+import com.example.ferenc.railjet_reservation_app.db.DBController;
 import com.example.ferenc.railjet_reservation_app.train.ClassType;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,22 +29,16 @@ public class MainPageController implements Initializable {
 
     @FXML
     private Button btnChoose;
-
     @FXML
     private Button btnSelectedTrain;
     @FXML
     private Button btnShoppingCart;
     @FXML
     private Button btnSelectedCar;
-
     @FXML
     private ChoiceBox<String> chBoxTrainClass;
-
     @FXML
     private ChoiceBox<String> chBoxTrainNumber;
-
-
-
     @FXML
     private Label lblCar;
     @FXML
@@ -52,48 +48,44 @@ public class MainPageController implements Initializable {
     private Railcar Ampz;
     private Railcar ARbmpz;
     private Railcar Bmpz_1;
-
     private Railcar Bmpz_2;
-
     private Railcar Bmpz_3;
-
     private Railcar Bmpvz;
-
     private final List<Railcar> Rjx162 = new ArrayList<Railcar>();
     private Alert alert;
-
     private Seat seat;
-
     @FXML
     private MenuItem mniDbHun;
-
     @FXML
     private MenuItem mniMavHu;
-
     @FXML
     private MenuItem mniObbHu;
-
     @FXML
     private MenuItem mniSbbHun;
-
     @FXML
     private MenuItem miniSbbDe;
-
     @FXML
     private MenuItem mniDbDe;
-
     @FXML
     private MenuItem mniMavDe;
-
     @FXML
     private MenuItem mniObbDe;
-
     DataSingeleton data;
+    private String ticket;
+    private String db_url;
+    private String userName;
+    private String password;
 
-    String ticket;
+    private DBController dbcontroller;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        db_url = "jdbc:postgresql://localhost/railjet_db";
+        userName = "postgres";
+        password = "Plutonium-36";
+
+        Connect();
 
         chBoxTrainNumber.getItems().add("RJX162");
         chBoxTrainNumber.getSelectionModel().select(0);
@@ -129,6 +121,24 @@ public class MainPageController implements Initializable {
         data = DataSingeleton.getInstance();
 
     }
+
+    private void Connect() {
+
+        try {
+            dbcontroller = new DBController(db_url, userName, password);
+            System.out.println("Fasza minden");
+
+        } catch (SQLException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Sikertelen csatlakozás! / Verbindung fehlgeschlagen!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+    }
+
     @FXML
     public void LoadTrainData(){
 
