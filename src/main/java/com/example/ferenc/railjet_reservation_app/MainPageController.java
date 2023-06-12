@@ -98,7 +98,9 @@ public class MainPageController implements Initializable {
         btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
         ticket = "";
 
-        //a adatbázisból érkező adatok
+        /*
+        A vonat adatai már a posgtresql adatbázisban vannak:
+
         Afmpz = new Railcar("27/1.","Első Osztály / First Class",ClassType.PREMIUM, 16);
         AfmpzSecondPart = new Railcar("27/2.","Első Osztály / First Class",ClassType.BUSINESS, 11);
         Ampz = new Railcar("26.","Első Osztály / First Class",ClassType.BUSINESS, 55);
@@ -107,21 +109,34 @@ public class MainPageController implements Initializable {
         Bmpz_2 = new Railcar("23.","Másodsztály / Second Class",ClassType.ECONOMY, 76);
         Bmpz_3 = new Railcar("22.","Másodsztály / Second Class",ClassType.ECONOMY, 80);
         Bmpvz= new Railcar("21.","Másodsztály / Second Class",ClassType.ECONOMY, 72);
+        */
 
-
-        Rjx162.add(Afmpz);
-        Rjx162.add(AfmpzSecondPart);
-        Rjx162.add(Ampz);
-        Rjx162.add(ARbmpz);
-        Rjx162.add(Bmpz_1);
-        Rjx162.add(Bmpz_2);
-        Rjx162.add(Bmpz_3);
-        Rjx162.add(Bmpvz);
+        //CreateTest();
 
         data = DataSingeleton.getInstance();
 
     }
+    /*
+    private void CreateTest() {
 
+        try {
+
+            for (Railcar car :Rjx162) {
+                dbcontroller.CreateCar(car);
+            }
+
+            dbcontroller.StartSaving();
+        } catch (SQLException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Sikertelen mentés! / Speichern fehlgeschlagen!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+    }
+    */
     private void Connect() {
 
         try {
