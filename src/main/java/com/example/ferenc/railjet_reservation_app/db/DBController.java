@@ -1,9 +1,12 @@
 package com.example.ferenc.railjet_reservation_app.db;
 
 
+import com.example.ferenc.railjet_reservation_app.train.ClassType;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBController {
 
@@ -72,6 +75,31 @@ public class DBController {
         } catch (Exception e) {
             throw new SQLException("Ülőhely adatbázis sikeresen visszaállt az alapállapotba! Datenbankrücksetzung erfolgreich!");
         }
+    }
+
+    public List<Railcar> GetTrainData() throws SQLException {
+
+        List<Railcar> train = new ArrayList<>();
+
+        try {
+
+            stm = conn.prepareStatement("select * from railcardata");
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()){
+
+                train.add(new Railcar(rs.getInt("id"), rs.getString("wagennummer"), rs.getString("wagenklasse"), ClassType.GetClassType(rs.getString("wagentyp")), rs.getInt("sitzplatzanzahl"), 0));
+
+            }
+            rs.close();
+            stm.clearParameters();
+
+        } catch (Exception e) {
+            throw new SQLException("Sikertelen adatbetöltés! Beim laden der Dateien ist ein Fehler aufgetreten!");
+        }
+
+        return train;
     }
 
 }

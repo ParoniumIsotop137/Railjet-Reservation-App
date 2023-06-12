@@ -43,15 +43,7 @@ public class MainPageController implements Initializable {
     private Label lblCar;
     @FXML
     private AnchorPane mainAnchorPane;
-    private Railcar Afmpz;
-    private Railcar AfmpzSecondPart;
-    private Railcar Ampz;
-    private Railcar ARbmpz;
-    private Railcar Bmpz_1;
-    private Railcar Bmpz_2;
-    private Railcar Bmpz_3;
-    private Railcar Bmpvz;
-    private final List<Railcar> Rjx162 = new ArrayList<Railcar>();
+    private static List<Railcar> Rjx162;
     private Alert alert;
     private Seat seat;
     @FXML
@@ -86,7 +78,7 @@ public class MainPageController implements Initializable {
         password = "Plutonium-36";
 
         Connect();
-
+        Rjx162 = new ArrayList<Railcar>();
         chBoxTrainNumber.getItems().add("RJX162");
         chBoxTrainNumber.getSelectionModel().select(0);
 
@@ -99,7 +91,7 @@ public class MainPageController implements Initializable {
         ticket = "";
 
         /*
-        A vonat adatai már a posgtresql adatbázisban vannak:
+        A vonat adatai már a posgtresql adatbázisból érkeznek:
 
         Afmpz = new Railcar("27/1.","Első Osztály / First Class",ClassType.PREMIUM, 16);
         AfmpzSecondPart = new Railcar("27/2.","Első Osztály / First Class",ClassType.BUSINESS, 11);
@@ -112,10 +104,26 @@ public class MainPageController implements Initializable {
         */
 
         //CreateTest();
-
+        GetTrainDataFromDB();
         data = DataSingeleton.getInstance();
 
     }
+
+    private void GetTrainDataFromDB() {
+
+        try {
+            Rjx162 = dbcontroller.GetTrainData();
+        } catch (SQLException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Sikertelen adatbetöltés! / Zugdaten konnten nicht geladen werden!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+    }
+
     /*
     private void CreateTest() {
 
@@ -141,7 +149,6 @@ public class MainPageController implements Initializable {
 
         try {
             dbcontroller = new DBController(db_url, userName, password);
-            System.out.println("Fasza minden");
 
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
