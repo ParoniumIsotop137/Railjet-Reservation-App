@@ -32,6 +32,7 @@ public class Railcar {
         this.classType = classType;
         this.maxSeatsNumber = maxSeatsNumber;
         this.reservedSeatsNumber = reservedSeatsNumber;
+        this.seats = new ArrayList<Seat>();
     }
 
     public String getType() {
