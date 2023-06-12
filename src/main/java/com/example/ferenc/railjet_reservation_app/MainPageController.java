@@ -209,7 +209,7 @@ public class MainPageController implements Initializable {
 
 
     }
-
+    @FXML
     private void AddSeatToTrain() {
 
         seat = data.getSeat();
@@ -259,7 +259,7 @@ public class MainPageController implements Initializable {
                     alert.show();
                 } catch (Exception e) {
                     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Hiba! / Fehler");
+                    errorAlert.setTitle("Hiba! / Fehler");
                     errorAlert.setContentText(e.getMessage());
                     errorAlert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
                     errorAlert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
