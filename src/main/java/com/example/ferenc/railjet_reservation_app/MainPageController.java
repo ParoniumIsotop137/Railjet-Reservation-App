@@ -1,6 +1,7 @@
 package com.example.ferenc.railjet_reservation_app;
 
 import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
+import com.example.ferenc.railjet_reservation_app.db.DBController;
 import com.example.ferenc.railjet_reservation_app.train.ClassType;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,74 +29,56 @@ public class MainPageController implements Initializable {
 
     @FXML
     private Button btnChoose;
-
     @FXML
     private Button btnSelectedTrain;
     @FXML
     private Button btnShoppingCart;
     @FXML
     private Button btnSelectedCar;
-
     @FXML
     private ChoiceBox<String> chBoxTrainClass;
-
     @FXML
     private ChoiceBox<String> chBoxTrainNumber;
-
-
-
     @FXML
     private Label lblCar;
     @FXML
     private AnchorPane mainAnchorPane;
-    private Railcar Afmpz;
-    private Railcar AfmpzSecondPart;
-    private Railcar Ampz;
-    private Railcar ARbmpz;
-    private Railcar Bmpz_1;
-
-    private Railcar Bmpz_2;
-
-    private Railcar Bmpz_3;
-
-    private Railcar Bmpvz;
-
-    private final List<Railcar> Rjx162 = new ArrayList<Railcar>();
+    private static List<Railcar> Rjx162;
     private Alert alert;
-
     private Seat seat;
-
     @FXML
     private MenuItem mniDbHun;
-
     @FXML
     private MenuItem mniMavHu;
-
     @FXML
     private MenuItem mniObbHu;
-
     @FXML
     private MenuItem mniSbbHun;
-
     @FXML
     private MenuItem miniSbbDe;
-
     @FXML
     private MenuItem mniDbDe;
-
     @FXML
     private MenuItem mniMavDe;
-
     @FXML
     private MenuItem mniObbDe;
-
     DataSingeleton data;
+    private String ticket;
+    private String db_url;
+    private String userName;
+    private String password;
 
-    String ticket;
+    private DBController dbcontroller;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        db_url = "jdbc:postgresql://localhost/railjet_db";
+        userName = "postgres";
+        password = "Plutonium-36";
+
+        Connect();
+        Rjx162 = new ArrayList<Railcar>();
         chBoxTrainNumber.getItems().add("RJX162");
         chBoxTrainNumber.getSelectionModel().select(0);
 
@@ -106,7 +90,9 @@ public class MainPageController implements Initializable {
         btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
         ticket = "";
 
-        //a adatbázisból érkező adatok
+        /*
+        A vonat adatai már a posgtresql adatbázisból érkeznek:
+
         Afmpz = new Railcar("27/1.","Első Osztály / First Class",ClassType.PREMIUM, 16);
         AfmpzSecondPart = new Railcar("27/2.","Első Osztály / First Class",ClassType.BUSINESS, 11);
         Ampz = new Railcar("26.","Első Osztály / First Class",ClassType.BUSINESS, 55);
@@ -115,20 +101,66 @@ public class MainPageController implements Initializable {
         Bmpz_2 = new Railcar("23.","Másodsztály / Second Class",ClassType.ECONOMY, 76);
         Bmpz_3 = new Railcar("22.","Másodsztály / Second Class",ClassType.ECONOMY, 80);
         Bmpvz= new Railcar("21.","Másodsztály / Second Class",ClassType.ECONOMY, 72);
+        */
 
-
-        Rjx162.add(Afmpz);
-        Rjx162.add(AfmpzSecondPart);
-        Rjx162.add(Ampz);
-        Rjx162.add(ARbmpz);
-        Rjx162.add(Bmpz_1);
-        Rjx162.add(Bmpz_2);
-        Rjx162.add(Bmpz_3);
-        Rjx162.add(Bmpvz);
-
+        //CreateTest();
+        GetTrainDataFromDB();
         data = DataSingeleton.getInstance();
 
     }
+
+    private void GetTrainDataFromDB() {
+
+        try {
+            Rjx162 = dbcontroller.GetTrainData();
+        } catch (SQLException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Sikertelen adatbetöltés! / Zugdaten konnten nicht geladen werden!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+    }
+
+    /*
+    private void CreateTest() {
+
+        try {
+
+            for (Railcar car :Rjx162) {
+                dbcontroller.CreateCar(car);
+            }
+
+            dbcontroller.StartSaving();
+        } catch (SQLException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Sikertelen mentés! / Speichern fehlgeschlagen!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+    }
+    */
+    private void Connect() {
+
+        try {
+            dbcontroller = new DBController(db_url, userName, password);
+
+        } catch (SQLException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Sikertelen csatlakozás! / Verbindung fehlgeschlagen!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+    }
+
     @FXML
     public void LoadTrainData(){
 
@@ -255,18 +287,21 @@ public class MainPageController implements Initializable {
 
         Parent root;
         ticket = this.seat.toString();
+
+
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ShoppingCardView.fxml"));
-
             root = loader.load();
+
+            String css = this.getClass().getResource("listview.css").toExternalForm();
 
             ShoppingCardController scc = loader.getController();
             scc.setTicket(ticket);
             Stage secondStage = new Stage();
             Scene scene = new Scene(root);
             scene.setUserData(data.getSeat());
-            scene.getStylesheets().add("listview.css");
+            scene.getStylesheets().add(css);
             secondStage.setScene(scene);
             secondStage.setTitle("Kosár tartalma / Tickets im Warenkorb");
             secondStage.initModality(Modality.APPLICATION_MODAL);
@@ -280,7 +315,5 @@ public class MainPageController implements Initializable {
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }
-        this.seat =  null;
-
     }
 }

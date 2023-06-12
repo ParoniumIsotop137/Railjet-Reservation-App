@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Railcar {
 
+    private Integer id;
     private String carNumber;
     private String type;
     private ClassType classType;
@@ -24,8 +25,33 @@ public class Railcar {
         this.carNumber = carNumber;
     }
 
+    public Railcar(Integer id, String carNumber, String type, ClassType classType, int maxSeatsNumber, int reservedSeatsNumber) {
+        this.id = id;
+        this.carNumber = carNumber;
+        this.type = type;
+        this.classType = classType;
+        this.maxSeatsNumber = maxSeatsNumber;
+        this.reservedSeatsNumber = reservedSeatsNumber;
+    }
+
     public String getType() {
         return type;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+
+        if(this.id == null){
+            this.id = id;
+        }
+        else{
+            throw new IllegalStateException("Hiba! A kocsi ID csak egyszer kaphat értéket! / Fehler! Die Wagen ID darf nur einmal eingestellt werden");
+        }
+
+
     }
 
     public String getCarNumber() {
@@ -80,5 +106,11 @@ public class Railcar {
 
     public void setReservedSeatsNumber(int reservedSeatsNumber) {
         this.reservedSeatsNumber = reservedSeatsNumber;
+    }
+
+    public int getFreeSeatsNumber(){
+        long reservedSeats = this.seats.stream().filter(s -> s.isReserved()).count();
+        int freeSeatsNumber = (int) (this.maxSeatsNumber-reservedSeats);
+        return freeSeatsNumber;
     }
 }
