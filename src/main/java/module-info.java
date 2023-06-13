@@ -1,6 +1,7 @@
 module com.example.ferenc.railjet_reservation_app {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.web;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
