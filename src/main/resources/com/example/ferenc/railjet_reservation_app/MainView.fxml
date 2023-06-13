@@ -43,18 +43,18 @@
         <menus>
           <Menu fx:id="menuInfoHun" mnemonicParsing="false" text="Pályainformációk">
                <items>
-                  <MenuItem fx:id="mniMavHu" mnemonicParsing="false" text="MÁV" />
-                  <MenuItem fx:id="mniObbHu" mnemonicParsing="false" text="ÖBB / Ausztria" />
-                  <MenuItem fx:id="mniDbHun" mnemonicParsing="false" text="DB / Németország" />
-                  <MenuItem fx:id="mniSbbHun" mnemonicParsing="false" text="SBB / Svájc" />
+                  <MenuItem fx:id="mniMavHu" mnemonicParsing="false" onAction="#StartBrowser" text="MÁV" />
+                  <MenuItem fx:id="mniObbHu" mnemonicParsing="false" onAction="#StartBrowser" text="ÖBB / Ausztria" />
+                  <MenuItem fx:id="mniDbHun" mnemonicParsing="false" onAction="#StartBrowser" text="DB / Németország" />
+                  <MenuItem fx:id="mniSbbHun" mnemonicParsing="false" onAction="#StartBrowser" text="SBB / Svájc" />
                </items>
           </Menu>
           <Menu fx:id="menuInfoDe" mnemonicParsing="false" text="Streckeninformationen">
                <items>
-                  <MenuItem fx:id="mniMavDe" mnemonicParsing="false" text="MÁV / Ungarn" />
-                  <MenuItem fx:id="mniObbDe" mnemonicParsing="false" text="ÖBB / Österreich" />
-                  <MenuItem fx:id="mniDbDe" mnemonicParsing="false" text="DB / Deutschland" />
-                  <MenuItem fx:id="miniSbbDe" mnemonicParsing="false" text="SBB / Schweiz" />
+                  <MenuItem fx:id="mniMavDe" mnemonicParsing="false" onAction="#StartBrowser" text="MÁV / Ungarn" />
+                  <MenuItem fx:id="mniObbDe" mnemonicParsing="false" onAction="#StartBrowser" text="ÖBB / Österreich" />
+                  <MenuItem fx:id="mniDbDe" mnemonicParsing="false" onAction="#StartBrowser" text="DB / Deutschland" />
+                  <MenuItem fx:id="miniSbbDe" mnemonicParsing="false" onAction="#StartBrowser" text="SBB / Schweiz" />
                </items>
           </Menu>
         </menus>

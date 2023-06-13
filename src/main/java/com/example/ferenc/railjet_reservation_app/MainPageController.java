@@ -4,9 +4,11 @@ import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
 import com.example.ferenc.railjet_reservation_app.db.DBController;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -47,26 +49,33 @@ public class MainPageController implements Initializable {
     private Seat seat;
     @FXML
     private MenuItem mniDbHun;
+    private String mniDbHunLink;
     @FXML
     private MenuItem mniMavHu;
+    private String mniMavHuLink;
     @FXML
     private MenuItem mniObbHu;
+    private String mniObbHuLink;
     @FXML
     private MenuItem mniSbbHun;
+    private String mniSbbHunLink;
     @FXML
     private MenuItem miniSbbDe;
+    private String miniSbbDeLink;
     @FXML
     private MenuItem mniDbDe;
+    private String mniDbDeLink;
     @FXML
     private MenuItem mniMavDe;
+    private String mniMavDeLink;
     @FXML
     private MenuItem mniObbDe;
+    private String mniObbDeLink;
     DataSingeleton data;
     private String ticket;
     private String db_url;
     private String userName;
     private String password;
-
     private DBController dbcontroller;
 
     @Override
@@ -105,6 +114,16 @@ public class MainPageController implements Initializable {
         //CreateTest();
         GetTrainDataFromDB();
         data = DataSingeleton.getInstance();
+
+        mniDbHunLink ="https://www.bahn.de/service/fahrplaene/aktuell";
+        mniMavHuLink ="https://www.mavcsoport.hu/mav-start/belfoldi-utazas/vaganyzar";
+        mniObbHuLink ="https://fahrplan.oebb.at/webapp/#!P|HimSearch!histId|6!histKey|H135457";
+        mniSbbHunLink = "https://www.sbb.ch/en/timetable/rail-traffic-information.html";
+        miniSbbDeLink = "https://www.sbb.ch/de/fahrplan/bahnverkehrsinformation.html";
+        mniDbDeLink = "https://www.bahn.de/service/fahrplaene/aktuell";
+        mniMavDeLink = "https://www.mavcsoport.hu/en/mav-start/domestic-travels/dear-passenger";
+        mniObbDeLink = "https://fahrplan.oebb.at/webapp/#!P|HimSearch!histId|1!histKey|H369172";
+
 
     }
 
@@ -333,5 +352,71 @@ public class MainPageController implements Initializable {
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }
+    }
+
+    @FXML
+    void StartBrowser(ActionEvent event) {
+
+        String id = ((MenuItem) event.getSource()).getId();
+
+        switch (id){
+            case "mniDbHun":
+                OpenInfoPage(mniDbHunLink);
+                break;
+            case "mniMavHu":
+                OpenInfoPage(mniMavHuLink);
+                break;
+            case "mniObbHu":
+                OpenInfoPage(mniObbHuLink);
+                break;
+            case "mniSbbHun":
+                OpenInfoPage(mniSbbHunLink);
+                break;
+            case "miniSbbDe":
+                OpenInfoPage(miniSbbDeLink);
+                break;
+            case "mniDbDe":
+                OpenInfoPage(mniDbDeLink);
+                break;
+            case "mniMavDe":
+                OpenInfoPage(mniMavDeLink);
+                break;
+            case "mniObbDe":
+                OpenInfoPage(mniObbDeLink);
+                break;
+        }
+
+
+    }
+
+    private void OpenInfoPage(String link) {
+
+        Parent root;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BrowserViewWindow.fxml"));
+
+        try {
+            root = loader.load();
+            BrowserWindowController bwcontroller = loader.getController();
+            bwcontroller.setWebLink(link);
+            Stage secondStage = new Stage();
+            secondStage.setScene(new Scene(root));
+            secondStage.setTitle("Pályainformációk / Streckeninformationen");
+            secondStage.initModality(Modality.APPLICATION_MODAL);
+            bwcontroller.LoadPage();
+            secondStage.show();
+
+
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
+            alert.setContentText("Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+
     }
 }
