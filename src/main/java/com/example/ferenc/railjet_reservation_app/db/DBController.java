@@ -49,7 +49,7 @@ public class DBController {
 
 
         } catch (Exception e) {
-            throw new SQLException("Sikertelen adatmentés! Datenspeicherung fehlgeschlagen!"+e.getMessage());
+            throw new SQLException("Sikertelen adatmentés! / Datenspeicherung fehlgeschlagen!"+e.getMessage());
         }
 
     }
@@ -61,7 +61,7 @@ public class DBController {
             stm.execute();
             stm.clearParameters();
         } catch (Exception e) {
-            throw new SQLException("Visszaállítási pont létrehozása sikertelen! Erstellen des Rücksetzungspunktes fehlgeschlagen!");
+            throw new SQLException("Visszaállítási pont létrehozása sikertelen! / Erstellen des Rücksetzungspunktes fehlgeschlagen!");
         }
 
     }
@@ -73,7 +73,7 @@ public class DBController {
             stm.execute();
             stm.clearParameters();
         } catch (Exception e) {
-            throw new SQLException("Ülőhely adatbázis sikeresen visszaállt az alapállapotba! Datenbankrücksetzung erfolgreich!");
+            throw new SQLException("Ülőhely adatbázis sikeresen visszaállt az alapállapotba! / Datenbankrücksetzung erfolgreich!");
         }
     }
 
@@ -96,10 +96,30 @@ public class DBController {
             stm.clearParameters();
 
         } catch (Exception e) {
-            throw new SQLException("Sikertelen adatbetöltés! Beim laden der Dateien ist ein Fehler aufgetreten!");
+            throw new SQLException("Sikertelen adatbetöltés! / Beim laden der Dateien ist ein Fehler aufgetreten!");
         }
 
         return train;
+    }
+
+    public void setReservations(Railcar car) throws SQLException {
+
+        try {
+
+            stm = conn.prepareStatement("update railcardata set reservierungen=? where id=? and wagennummer=?");
+            stm.setInt(1, car.getReservedSeatsNumber());
+            stm.setInt(2, car.getId());
+            stm.setString(3, car.getCarNumber());
+
+            stm.executeUpdate();
+
+            stm.clearParameters();
+
+        } catch (SQLException e) {
+            throw new SQLException("Az ülőhelyfoglaltság frissítése sikertelen volt! / Die aktualisierung der Sitzplatzreservierungen war fehlgeschlagen!");
+        }
+
+
     }
 
 }
