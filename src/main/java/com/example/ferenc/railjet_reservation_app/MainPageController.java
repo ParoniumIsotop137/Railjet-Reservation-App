@@ -2,7 +2,6 @@ package com.example.ferenc.railjet_reservation_app;
 
 import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
 import com.example.ferenc.railjet_reservation_app.db.DBController;
-import com.example.ferenc.railjet_reservation_app.train.ClassType;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
 import javafx.fxml.FXML;
@@ -246,8 +245,10 @@ public class MainPageController implements Initializable {
 
         for (Railcar train : Rjx162) {
             if (chBoxTrainClass.getValue().contains(train.getCarNumber())) {
+                int index = chBoxTrainClass.getSelectionModel().getSelectedIndex();
                 try {
                     train.setReservedSeatNumberAndSeat(seat);
+                    UpdateDB(index);
                     SendMessage();
                     SetBackButton();
                 } catch (IllegalArgumentException e) {
@@ -271,6 +272,21 @@ public class MainPageController implements Initializable {
 
     }
 
+    private void UpdateDB(int index) {
+
+        try {
+            dbcontroller.setReservations(Rjx162.get(index));
+        } catch (SQLException e) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Hiba az adatok frissítésekor! / Fehler bei der Aktualisierung der Daten!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+    }
+
 
     private void SendMessage() {
 
@@ -280,6 +296,8 @@ public class MainPageController implements Initializable {
         orderMessage.setHeaderText("Megerősítés / Bestätigung");
         orderMessage.setContentText("Sikeres ülőhelyfoglalás! / Sitzplatzreservierung erfolgreich!");
         orderMessage.show();
+
+
 
     }
     @FXML

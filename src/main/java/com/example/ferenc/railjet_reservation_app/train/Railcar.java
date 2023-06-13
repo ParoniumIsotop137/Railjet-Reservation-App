@@ -69,7 +69,8 @@ public class Railcar {
 
 
     public int getReservedSeatsNumber() {
-        return reservedSeatsNumber;
+
+        return this.reservedSeatsNumber;
     }
 
     public void setReservedSeatNumberAndSeat(Seat seat) {
@@ -109,9 +110,4 @@ public class Railcar {
         this.reservedSeatsNumber = reservedSeatsNumber;
     }
 
-    public int getFreeSeatsNumber(){
-        long reservedSeats = this.seats.stream().filter(s -> s.isReserved()).count();
-        int freeSeatsNumber = (int) (this.maxSeatsNumber-reservedSeats);
-        return freeSeatsNumber;
-    }
 }
