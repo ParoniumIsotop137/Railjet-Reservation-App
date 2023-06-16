@@ -18,31 +18,26 @@
             <Image url="@../../../../pictures/railjet.jpg" />
          </image>
       </ImageView>
-      <Label blendMode="MULTIPLY" layoutX="103.0" layoutY="26.0" text="Üdvözöljük ülőhelyfoglaló alkalmazásunkban!" textFill="#fd1212">
-         <font>
-            <Font name="Segoe UI Black Italic" size="18.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="chBoxTrainNumber" accessibleText="RJX162" layoutX="50.0" layoutY="85.0" prefWidth="150.0" />
-      <Label layoutX="87.0" layoutY="57.0" style="-fx-background-color: #E5E5E5;" text="Járat / Zug:" textAlignment="CENTER" textFill="#fd1212">
+      <ChoiceBox fx:id="chBoxTrainNumber" accessibleText="RJX162" layoutX="59.0" layoutY="109.0" prefWidth="150.0" />
+      <Label layoutX="96.0" layoutY="75.0" style="-fx-background-color: #E5E5E5;" text="Járat / Zug:" textAlignment="CENTER" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="chBoxTrainClass" layoutX="25.0" layoutY="200.0" prefHeight="25.0" prefWidth="203.0" />
-      <Label fx:id="lblCar" layoutX="73.0" layoutY="168.0" style="-fx-background-color: #E5E5E5;" text="Kocsi / Wagen" textAlignment="CENTER" textFill="#fd1212">
+      <ChoiceBox fx:id="chBoxTrainClass" layoutX="32.0" layoutY="245.0" prefHeight="25.0" prefWidth="203.0" />
+      <Label fx:id="lblCar" layoutX="77.0" layoutY="203.0" style="-fx-background-color: #E5E5E5;" text="Kocsi / Wagen" textAlignment="CENTER" textFill="#fd1212">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnSelectedTrain" layoutX="56.0" layoutY="131.0" mnemonicParsing="false" onAction="#LoadTrainData" text="Kiválaszt / Auswählen" />
-      <Button fx:id="btnChoose" layoutX="341.0" layoutY="85.0" mnemonicParsing="false" onAction="#AddSeatToTrain" text="Fizetés / Zahlung" />
-      <Button fx:id="btnSelectedCar" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#NextStep" text="Kiválaszt / Auswählen" />
-      <Button fx:id="btnShoppingCart" layoutX="336.0" layoutY="155.0" mnemonicParsing="false" onMouseClicked="#showShoppingCart" text="Kosár / Warenkorb" />
-      <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="600.0">
+      <Button fx:id="btnSelectedTrain" layoutX="56.0" layoutY="160.0" mnemonicParsing="false" onAction="#LoadTrainData" text="Kiválaszt / Auswählen" />
+      <Button fx:id="btnChoose" layoutX="345.0" layoutY="122.0" mnemonicParsing="false" onAction="#AddSeatToTrain" text="Fizetés / Zahlung" />
+      <Button fx:id="btnSelectedCar" layoutX="56.0" layoutY="297.0" mnemonicParsing="false" onAction="#NextStep" text="Kiválaszt / Auswählen" />
+      <Button fx:id="btnShoppingCart" layoutX="340.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#showShoppingCart" text="Kosár / Warenkorb" />
+      <MenuBar fx:id="menu" layoutY="1.0" prefHeight="25.0" prefWidth="600.0">
         <menus>
           <Menu fx:id="menuInfoHun" mnemonicParsing="false" text="Pályainformációk">
-               <items>
+              <items>
                   <MenuItem fx:id="mniMavHu" mnemonicParsing="false" onAction="#StartBrowser" text="MÁV" />
                   <MenuItem fx:id="mniObbHu" mnemonicParsing="false" onAction="#StartBrowser" text="ÖBB / Ausztria" />
                   <MenuItem fx:id="mniDbHun" mnemonicParsing="false" onAction="#StartBrowser" text="DB / Németország" />
@@ -59,5 +54,15 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Label blendMode="HARD_LIGHT" layoutX="72.0" layoutY="358.0" style="-fx-background-color: #ddeaf3;" text="Herzlich willkommen in unseren Reservierungsapp!" textFill="#fd1212">
+         <font>
+            <Font name="Segoe UI Black Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label blendMode="HARD_LIGHT" layoutX="104.0" layoutY="39.0" style="-fx-background-color: #ddeaf3;" text="Üdvözöljük ülőhelyfoglaló alkalmazásunkban!" textAlignment="CENTER" textFill="#fd1212">
+         <font>
+            <Font name="Segoe UI Black Italic" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

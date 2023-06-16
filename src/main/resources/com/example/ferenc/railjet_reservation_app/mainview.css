@@ -1,0 +1,47 @@
+#menu{
+    -fx-background-color: #08899d;
+    -fx-text-background-color: #bcb74d;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+
+}
+#btnSelectedTrain{
+
+        -fx-background-color: #284fbd;
+        -fx-text-fill:#ffffff;
+        -fx-font-family: "Blippo, fantasy";
+        -fx-font-size: 14px;
+        -fx-font-weight: bold;
+
+}
+
+#btnSelectedCar{
+
+        -fx-background-color: #284fbd;
+        -fx-text-fill:#ffffff;
+        -fx-font-family: "Blippo, fantasy";
+        -fx-font-size: 14px;
+        -fx-font-weight: bold;
+
+}
+
+#chBoxTrainNumber {
+
+        -fx-background-color: #f6f3d3;
+        -fx-text-fill:#404e61;
+        -fx-font-family: "Apple Chancery";
+        -fx-font-size: 14px;
+        -fx-font-style: oblique;
+
+}
+#chBoxTrainClass {
+
+        -fx-background-color: #f6f3d3;
+        -fx-text-fill:#404e61;
+        -fx-font-family: "Apple Chancery";
+        -fx-font-size: 14px;
+        -fx-font-style: oblique;
+
+}
