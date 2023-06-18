@@ -226,11 +226,18 @@ public class MainPageController implements Initializable {
         Parent root;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("NewWindowForDetails.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewWindowForDetails.fxml"));
+            root = loader.load();
+
+            DetailsViewController dvc = loader.getController();
+            dvc.setStationList(stations);
+
             Stage secondStage = new Stage();
             secondStage.setScene(new Scene(root));
             secondStage.setTitle("Helyfoglalás / Platzreservierung");
             secondStage.initModality(Modality.APPLICATION_MODAL);
+            dvc.LoadStations();
             secondStage.show();
 
 
@@ -239,7 +246,7 @@ public class MainPageController implements Initializable {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hiba! / Störung!");
             alert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
-            alert.setContentText("Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!");
+            alert.setContentText("Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!"+e.getMessage());
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }
