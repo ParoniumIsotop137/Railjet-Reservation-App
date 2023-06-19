@@ -78,13 +78,13 @@ public class DBController {
         }
     }
 
-    public List<Railcar> GetTrainData() throws SQLException {
+    public List<Railcar> GetTrainData(String trainNumber) throws SQLException {
 
         List<Railcar> train = new ArrayList<>();
 
         try {
 
-            stm = conn.prepareStatement("select * from railcardata_rjx162");
+            stm = conn.prepareStatement("select * from "+trainNumber);
 
             ResultSet rs = stm.executeQuery();
 
@@ -103,11 +103,11 @@ public class DBController {
         return train;
     }
 
-    public void setReservations(Railcar car) throws SQLException {
+    public void setReservations(Railcar car, String trainNumber) throws SQLException {
 
         try {
 
-            stm = conn.prepareStatement("update railcardata set reservierungen=? where id=? and wagennummer=?");
+            stm = conn.prepareStatement("update "+trainNumber+" set reservierungen=? where id=? and wagennummer=?");
             stm.setInt(1, car.getReservedSeatsNumber());
             stm.setInt(2, car.getId());
             stm.setString(3, car.getCarNumber());

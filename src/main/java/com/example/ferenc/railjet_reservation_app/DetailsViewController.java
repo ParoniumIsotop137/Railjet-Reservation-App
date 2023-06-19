@@ -63,7 +63,7 @@ public class DetailsViewController implements Initializable {
         if(!startStations.getValue().equals(endStations.getValue())){
 
 
-            seat = new Seat((stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationNumber()), ((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationNumber())), spnNumberOfPersons.getValue());
+            seat = new Seat((stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationNumber()), ((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationNumber())), (stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationName()), ((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationName())), spnNumberOfPersons.getValue());
 
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Megerősítés / Bestätigung");

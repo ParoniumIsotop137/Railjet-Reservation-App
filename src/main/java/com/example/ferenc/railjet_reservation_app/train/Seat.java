@@ -5,17 +5,20 @@ import com.example.ferenc.railjet_reservation_app.routes.RJX162Stations;
 public class Seat {
 
     private int startStationId;
+    private String startStationName;
     private int endStationId;
-
+    private String endStationName;
     private int numberOfPersons;
 
     private boolean isReserved;
 
 
 
-    public Seat(int startStationId, int endStationId, int numberOfPersons) {
+    public Seat(int startStationId, int endStationId, String startStationName, String endStationName, int numberOfPersons) {
         this.startStationId = startStationId;
         this.endStationId = endStationId;
+        this.startStationName = startStationName;
+        this.endStationName = endStationName;
         this.numberOfPersons = numberOfPersons;
         this.isReserved = true;
     }
@@ -62,11 +65,12 @@ public class Seat {
 
 
     }
-    /*
+
     @Override
     public String toString() {
-        return "Ülőhely / Stitzplatz von: "+ startStation.getName() +
-                "\nállomástól / bis: " + endStation.getName() +
-                "\nutasok száma / Personen: " + String.valueOf(numberOfPersons)+" fő\n";
-    */
+        return "Ülőhely / Stitzplatz von: " + startStationName +
+                "\nállomástól / bis: " + endStationName +
+                "\nutasok száma / Personen: " + String.valueOf(numberOfPersons) + " fő\n";
+    }
+
 }

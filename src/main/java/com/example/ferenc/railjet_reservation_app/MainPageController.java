@@ -77,7 +77,7 @@ public class MainPageController implements Initializable {
     private String userName;
     private String password;
     private DBController dbcontroller;
-
+    private String trainNumber;
     private List<Station> stations;
 
     @Override
@@ -100,6 +100,7 @@ public class MainPageController implements Initializable {
         btnChoose.setVisible(false);
         btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
         ticket = "";
+        trainNumber = "";
 
         /*
         A vonat adatai már a posgtresql adatbázisból érkeznek:
@@ -130,10 +131,10 @@ public class MainPageController implements Initializable {
 
     }
 
-    private void GetTrainDataFromDB() {
+    private void GetTrainDataFromDB(String trainNumber) {
 
         try {
-            railjet = dbcontroller.GetTrainData();
+            railjet = dbcontroller.GetTrainData(trainNumber);
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hiba! / Störung!");
@@ -189,8 +190,12 @@ public class MainPageController implements Initializable {
         try{
             if(chBoxTrainNumber.getSelectionModel().getSelectedItem().equals("RJX162")){
                 timeTable = "TimeTable_Rjx162";
+                trainNumber = "railcardata_rjx162";
                 stations = dbcontroller.getTimeTable(timeTable);
 
+            }
+            else{
+                //másik vonat és menetrendi adatok
             }
         } catch(SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -201,7 +206,7 @@ public class MainPageController implements Initializable {
             alert.show();
         }
 
-        GetTrainDataFromDB();
+        GetTrainDataFromDB(trainNumber);
         chBoxTrainClass.setVisible(true);
 
         for (Railcar railcar: railjet) {
@@ -294,7 +299,7 @@ public class MainPageController implements Initializable {
                 int index = chBoxTrainClass.getSelectionModel().getSelectedIndex();
                 try {
                     train.setReservedSeatNumberAndSeat(seat);
-                    UpdateDB(index);
+                    UpdateDB(index, trainNumber);
                     SendMessage();
                     SetBackButton();
                 } catch (IllegalArgumentException e) {
@@ -318,10 +323,10 @@ public class MainPageController implements Initializable {
 
     }
 
-    private void UpdateDB(int index) {
+    private void UpdateDB(int index, String trainNumber) {
 
         try {
-            dbcontroller.setReservations(railjet.get(index));
+            dbcontroller.setReservations(railjet.get(index), trainNumber);
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hiba! / Störung!");
