@@ -63,11 +63,11 @@ public class DetailsViewController implements Initializable {
         if(!startStations.getValue().equals(endStations.getValue())){
 
 
-            seat = new Seat(RJX162Stations.getStation(startStations.getValue()), RJX162Stations.getStation(endStations.getValue()), spnNumberOfPersons.getValue());
+            seat = new Seat((stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationNumber()), ((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationNumber())), spnNumberOfPersons.getValue());
 
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Megerősítés / Bestätigung");
-            alert.setContentText("Induló állomás / Startbahnhof: "+seat.getStartStation().getName()+"\n"+"Célállomás / Zielbahnhof: "+seat.getEndStation().getName()+"\n"+String.valueOf(seat.getNumberOfPersons())+" fő/ Personen.");
+            alert.setContentText("Induló állomás / Startbahnhof: "+((stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationName())+"\n"+"Célállomás / Zielbahnhof: "+((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationName())+"\n"+String.valueOf(seat.getNumberOfPersons())+" fő/ Personen.")));
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
 

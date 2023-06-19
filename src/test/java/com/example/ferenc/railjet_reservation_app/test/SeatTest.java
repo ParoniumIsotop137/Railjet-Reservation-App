@@ -10,10 +10,10 @@ public class SeatTest {
     @Test
     void checkIfSeatFreeTest(){
 
-        Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM, 1);
-        Seat testSeat2 = new Seat(RJX162Stations.MOSONMAGYAROVAR, RJX162Stations.SALZBURG, 1);
+        Seat testSeat = new Seat(3, 5, 1);
+        Seat testSeat2 = new Seat(4, 10, 1);
 
-        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
+        testSeat.checkIfSeatFree(testSeat2.getStartStationId(), testSeat2.getEndStationId());
 
         assertFalse(testSeat.isReserved());
 
@@ -21,30 +21,30 @@ public class SeatTest {
 
     @Test
     void checkIfSeatFreeTest2(){
-        Seat testSeat = new Seat(RJX162Stations.GYOR, RJX162Stations.HEGYESHALOM, 1);
-        Seat testSeat2 = new Seat(RJX162Stations.WIENHBF, RJX162Stations.SALZBURG, 1);
+        Seat testSeat = new Seat(3, 5, 1);
+        Seat testSeat2 = new Seat(6, 10, 1);
 
-        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
+        testSeat.checkIfSeatFree(testSeat2.getStartStationId(), testSeat2.getEndStationId());
 
         assertFalse(testSeat.isReserved());
     }
     @Test
     void checkIfSeatFreeTest3(){
 
-        Seat testSeat = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR, 1);
-        Seat testSeat2 = new Seat(RJX162Stations.WIENHBF, RJX162Stations.SALZBURG, 1);
+        Seat testSeat = new Seat(0, 3, 1);
+        Seat testSeat2 = new Seat(6, 10, 1);
 
-        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
+        testSeat.checkIfSeatFree(testSeat2.getStartStationId(), testSeat2.getEndStationId());
         assertFalse(testSeat.isReserved());
 
     }
     @Test
     void checkIfSeatFreeTest4(){
 
-        Seat testSeat = new Seat(RJX162Stations.WIENHBF, RJX162Stations.SALZBURG, 1);
-        Seat testSeat2 = new Seat(RJX162Stations.BUDAPESTKELETI, RJX162Stations.GYOR, 1);
+        Seat testSeat = new Seat(6, 10, 1);
+        Seat testSeat2 = new Seat(0, 3, 1);
 
-        testSeat.checkIfSeatFree(testSeat2.getStartStation(), testSeat2.getEndStation());
+        testSeat.checkIfSeatFree(testSeat2.getStartStationId(), testSeat2.getEndStationId());
         assertFalse(testSeat.isReserved());
     }
 

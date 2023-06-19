@@ -4,8 +4,8 @@ import com.example.ferenc.railjet_reservation_app.routes.RJX162Stations;
 
 public class Seat {
 
-    private RJX162Stations startStation;
-    private RJX162Stations endStation;
+    private int startStationId;
+    private int endStationId;
 
     private int numberOfPersons;
 
@@ -13,27 +13,27 @@ public class Seat {
 
 
 
-    public Seat(RJX162Stations startStation, RJX162Stations endStation, int numberOfPersons) {
-        this.startStation = startStation;
-        this.endStation = endStation;
+    public Seat(int startStationId, int endStationId, int numberOfPersons) {
+        this.startStationId = startStationId;
+        this.endStationId = endStationId;
         this.numberOfPersons = numberOfPersons;
         this.isReserved = true;
     }
 
-    public RJX162Stations getStartStation() {
-        return startStation;
+    public int getStartStationId() {
+        return startStationId;
     }
 
-    public RJX162Stations getEndStation() {
-        return endStation;
+    public int getEndStationId() {
+        return endStationId;
     }
 
     public boolean isReserved() {
         return isReserved;
     }
 
-    public void setEndStation(RJX162Stations endStation) {
-        this.endStation = endStation;
+    public void setEndStationId(int endStationId) {
+        this.endStationId = endStationId;
     }
 
     public void setReserved(boolean reserved) {
@@ -44,17 +44,17 @@ public class Seat {
         return numberOfPersons;
     }
 
-    public void setStartStation(RJX162Stations startStation) {
-        this.startStation = startStation;
+    public void setStartStationId(int startStationId) {
+        this.startStationId = startStationId;
     }
 
-    public void checkIfSeatFree(RJX162Stations startStation, RJX162Stations endStation){
+    public void checkIfSeatFree(int startStationId, int endStationId){
 
-        if(this.endStation.getId() < startStation.getId()) {
+        if(this.endStationId < startStationId) {
             this.setReserved(false);
-        } else if (this.startStation.getId() > endStation.getId()) {
+        } else if (this.startStationId > endStationId) {
             this.setReserved(false);
-        } else if (this.startStation.getId() < startStation.getId() && this.endStation.getId() < endStation.getId()) {
+        } else if (this.startStationId < startStationId && this.endStationId < endStationId) {
             this.setReserved(false);
         } else{
             this.setReserved(true);
@@ -62,11 +62,11 @@ public class Seat {
 
 
     }
-
+    /*
     @Override
     public String toString() {
         return "Ülőhely / Stitzplatz von: "+ startStation.getName() +
                 "\nállomástól / bis: " + endStation.getName() +
                 "\nutasok száma / Personen: " + String.valueOf(numberOfPersons)+" fő\n";
-    }
+    */
 }
