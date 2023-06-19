@@ -45,3 +45,23 @@
         -fx-font-style: oblique;
 
 }
+
+#btnChoose {
+
+        -fx-background-color: #6495ED;
+        -fx-text-fill: #DC143C;
+        -fx-font-family: "Blippo, fantasy";
+        -fx-font-size: 16px;
+        -fx-font-weight: bold;
+
+}
+
+#btnShoppingCart {
+
+            -fx-background-color: #FAFAD2;
+            -fx-text-fill: #5F9EA0;
+            -fx-font-family: "Segoe UI Bold";
+            -fx-font-size: 14px;
+            -fx-font-weight: bold;
+
+}
