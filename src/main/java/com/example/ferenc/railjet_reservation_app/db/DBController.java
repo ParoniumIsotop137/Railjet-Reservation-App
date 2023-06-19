@@ -1,6 +1,7 @@
 package com.example.ferenc.railjet_reservation_app.db;
 
 
+import com.example.ferenc.railjet_reservation_app.routes.Station;
 import com.example.ferenc.railjet_reservation_app.train.ClassType;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 
@@ -77,13 +78,13 @@ public class DBController {
         }
     }
 
-    public List<Railcar> GetTrainData() throws SQLException {
+    public List<Railcar> GetTrainData(String trainNumber) throws SQLException {
 
         List<Railcar> train = new ArrayList<>();
 
         try {
 
-            stm = conn.prepareStatement("select * from railcardata");
+            stm = conn.prepareStatement("select * from "+trainNumber);
 
             ResultSet rs = stm.executeQuery();
 
@@ -96,17 +97,17 @@ public class DBController {
             stm.clearParameters();
 
         } catch (Exception e) {
-            throw new SQLException("Sikertelen adatbetöltés! / Beim laden der Dateien ist ein Fehler aufgetreten!");
+            throw new SQLException("Sikertelen adatbetöltés! / Beim laden der Dateien ist ein Fehler aufgetreten! "+e.getMessage());
         }
 
         return train;
     }
 
-    public void setReservations(Railcar car) throws SQLException {
+    public void setReservations(Railcar car, String trainNumber) throws SQLException {
 
         try {
 
-            stm = conn.prepareStatement("update railcardata set reservierungen=? where id=? and wagennummer=?");
+            stm = conn.prepareStatement("update "+trainNumber+" set reservierungen=? where id=? and wagennummer=?");
             stm.setInt(1, car.getReservedSeatsNumber());
             stm.setInt(2, car.getId());
             stm.setString(3, car.getCarNumber());
@@ -115,11 +116,34 @@ public class DBController {
 
             stm.clearParameters();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new SQLException("Az ülőhelyfoglaltság frissítése sikertelen volt! / Die aktualisierung der Sitzplatzreservierungen war fehlgeschlagen!");
         }
 
 
+    }
+
+    public List<Station> getTimeTable(String timeTableName) throws SQLException {
+
+        List<Station> stations = new ArrayList<Station>();
+
+        try {
+            stm = conn.prepareStatement("select * from "+timeTableName);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()){
+                stations.add(new Station(rs.getString("bahnhof"), rs.getInt("bahnhofnummer"), rs.getString("abfahrtszeit")));
+            }
+
+            rs.close();
+            stm.clearParameters();
+
+        } catch (Exception e) {
+            throw new SQLException("A menetrend betöltése sikertelen volt! / Der Fahrplan konnte nicht geladen werden!");
+        }
+
+        return stations;
     }
 
 }

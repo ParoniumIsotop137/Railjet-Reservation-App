@@ -2,13 +2,13 @@ package com.example.ferenc.railjet_reservation_app;
 
 import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
 import com.example.ferenc.railjet_reservation_app.db.DBController;
+import com.example.ferenc.railjet_reservation_app.routes.Station;
 import com.example.ferenc.railjet_reservation_app.train.Railcar;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -44,7 +44,7 @@ public class MainPageController implements Initializable {
     private Label lblCar;
     @FXML
     private AnchorPane mainAnchorPane;
-    private static List<Railcar> Rjx162;
+    private static List<Railcar> railjet;
     private Alert alert;
     private Seat seat;
     @FXML
@@ -77,6 +77,8 @@ public class MainPageController implements Initializable {
     private String userName;
     private String password;
     private DBController dbcontroller;
+    private String trainNumber;
+    private List<Station> stations;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,7 +88,8 @@ public class MainPageController implements Initializable {
         password = "Plutonium-36";
 
         Connect();
-        Rjx162 = new ArrayList<Railcar>();
+        railjet = new ArrayList<Railcar>();
+        stations = new ArrayList<Station>();
         chBoxTrainNumber.getItems().add("RJX162");
         chBoxTrainNumber.getSelectionModel().select(0);
 
@@ -97,6 +100,7 @@ public class MainPageController implements Initializable {
         btnChoose.setVisible(false);
         btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
         ticket = "";
+        trainNumber = "";
 
         /*
         A vonat adatai már a posgtresql adatbázisból érkeznek:
@@ -112,7 +116,7 @@ public class MainPageController implements Initializable {
         */
 
         //CreateTest();
-        GetTrainDataFromDB();
+        //GetTrainDataFromDB();
         data = DataSingeleton.getInstance();
 
         mniDbHunLink ="https://www.bahn.de/service/fahrplaene/aktuell";
@@ -127,10 +131,10 @@ public class MainPageController implements Initializable {
 
     }
 
-    private void GetTrainDataFromDB() {
+    private void GetTrainDataFromDB(String trainNumber) {
 
         try {
-            Rjx162 = dbcontroller.GetTrainData();
+            railjet = dbcontroller.GetTrainData(trainNumber);
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hiba! / Störung!");
@@ -182,9 +186,30 @@ public class MainPageController implements Initializable {
     @FXML
     public void LoadTrainData(){
 
+        String timeTable;
+        try{
+            if(chBoxTrainNumber.getSelectionModel().getSelectedItem().equals("RJX162")){
+                timeTable = "TimeTable_Rjx162";
+                trainNumber = "railcardata_rjx162";
+                stations = dbcontroller.getTimeTable(timeTable);
+
+            }
+            else{
+                //másik vonat és menetrendi adatok
+            }
+        } catch(SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Hiba! / Störung!");
+            alert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
+            alert.setContentText(e.getMessage());
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+        GetTrainDataFromDB(trainNumber);
         chBoxTrainClass.setVisible(true);
 
-        for (Railcar railcar: Rjx162) {
+        for (Railcar railcar: railjet) {
             chBoxTrainClass.getItems().add(railcar.getCarNumber()+" "+railcar.getType()+" - "+railcar.getClassType().toString());
         }
         chBoxTrainClass.getSelectionModel().select(0);
@@ -206,11 +231,18 @@ public class MainPageController implements Initializable {
         Parent root;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("NewWindowForDetails.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewWindowForDetails.fxml"));
+            root = loader.load();
+
+            DetailsViewController dvc = loader.getController();
+            dvc.setStationList(stations);
+
             Stage secondStage = new Stage();
             secondStage.setScene(new Scene(root));
             secondStage.setTitle("Helyfoglalás / Platzreservierung");
             secondStage.initModality(Modality.APPLICATION_MODAL);
+            dvc.LoadStations();
             secondStage.show();
 
 
@@ -219,7 +251,7 @@ public class MainPageController implements Initializable {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hiba! / Störung!");
             alert.setHeaderText("Hiba történt! / Ein Fehler ist aufgetreten!");
-            alert.setContentText("Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!");
+            alert.setContentText("Hiba történt, kérjük próbálja meg később! / Ein Fehler ist aufgetreten, bitte versuchen es später erneut!"+e.getMessage());
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }
@@ -262,12 +294,12 @@ public class MainPageController implements Initializable {
 
     private void Reservation() {
 
-        for (Railcar train : Rjx162) {
+        for (Railcar train : railjet) {
             if (chBoxTrainClass.getValue().contains(train.getCarNumber())) {
                 int index = chBoxTrainClass.getSelectionModel().getSelectedIndex();
                 try {
                     train.setReservedSeatNumberAndSeat(seat);
-                    UpdateDB(index);
+                    UpdateDB(index, trainNumber);
                     SendMessage();
                     SetBackButton();
                 } catch (IllegalArgumentException e) {
@@ -291,10 +323,10 @@ public class MainPageController implements Initializable {
 
     }
 
-    private void UpdateDB(int index) {
+    private void UpdateDB(int index, String trainNumber) {
 
         try {
-            dbcontroller.setReservations(Rjx162.get(index));
+            dbcontroller.setReservations(railjet.get(index), trainNumber);
         } catch (SQLException e) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Hiba! / Störung!");

@@ -2,6 +2,7 @@ package com.example.ferenc.railjet_reservation_app;
 
 import com.example.ferenc.railjet_reservation_app.dataholder.DataSingeleton;
 import com.example.ferenc.railjet_reservation_app.routes.RJX162Stations;
+import com.example.ferenc.railjet_reservation_app.routes.Station;
 import com.example.ferenc.railjet_reservation_app.train.Seat;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,10 +15,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DetailsViewController implements Initializable {
 
@@ -38,6 +36,8 @@ public class DetailsViewController implements Initializable {
 
     private ArrayList<String> stations;
 
+    private List<Station> stationList;
+
     private Seat seat;
 
     DataSingeleton data;
@@ -50,12 +50,8 @@ public class DetailsViewController implements Initializable {
         spnNumberOfPersons.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100, 1));
 
         stations = new ArrayList<String>();
-        Arrays.stream(RJX162Stations.values()).forEach(e -> stations.add(e.getName()));
 
-        startStations.getItems().setAll(stations);
-        startStations.getSelectionModel().select(0);
-        endStations.getItems().setAll(stations);
-        endStations.getSelectionModel().selectLast();
+
 
         data = DataSingeleton.getInstance();
 
@@ -67,11 +63,11 @@ public class DetailsViewController implements Initializable {
         if(!startStations.getValue().equals(endStations.getValue())){
 
 
-            seat = new Seat(RJX162Stations.getStation(startStations.getValue()), RJX162Stations.getStation(endStations.getValue()), spnNumberOfPersons.getValue());
+            seat = new Seat((stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationNumber()), ((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationNumber())), (stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationName()), ((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationName())), spnNumberOfPersons.getValue());
 
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Megerősítés / Bestätigung");
-            alert.setContentText("Induló állomás / Startbahnhof: "+seat.getStartStation().getName()+"\n"+"Célállomás / Zielbahnhof: "+seat.getEndStation().getName()+"\n"+String.valueOf(seat.getNumberOfPersons())+" fő/ Personen.");
+            alert.setContentText("Induló állomás / Startbahnhof: "+((stationList.get(startStations.getSelectionModel().getSelectedIndex()).getStationName())+"\n"+"Célállomás / Zielbahnhof: "+((stationList.get(endStations.getSelectionModel().getSelectedIndex()).getStationName())+"\n"+String.valueOf(seat.getNumberOfPersons())+" fő/ Personen.")));
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
 
@@ -114,4 +110,21 @@ public class DetailsViewController implements Initializable {
 
     }
 
+    public void LoadStations(){
+
+        getStationList().stream().forEach(s -> stations.add(s.getStationName()));
+        startStations.getItems().setAll(stations);
+        startStations.getSelectionModel().select(0);
+        endStations.getItems().setAll(stations);
+        endStations.getSelectionModel().selectLast();
+
+    }
+
+    public void setStationList(List<Station> stationList) {
+        this.stationList = stationList;
+    }
+
+    public List<Station> getStationList() {
+        return stationList;
+    }
 }

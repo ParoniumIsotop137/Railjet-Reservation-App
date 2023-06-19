@@ -86,7 +86,7 @@ public class Railcar {
     public void CheckSeatReservation(Seat seat) {
 
         for (Seat item : this.seats) {
-            item.checkIfSeatFree(seat.getStartStation(), seat.getEndStation());
+            item.checkIfSeatFree(seat.getStartStationId(), seat.getEndStationId());
         }
         long reservedSeats = this.seats.stream().filter(s -> s.isReserved()).count();
 
