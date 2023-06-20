@@ -66,39 +66,103 @@
 
 }
 
+
 #mniMavHu {
 
-            -fx-background-color: #FF0000;
-            -fx-text-fill: #FFFFFF;
-            -fx-font-family: "Segoe UI Bold";
-            -fx-font-size: 14px;
-            -fx-font-weight: bold;
+          -fx-background-color: #FF0000;
+
+
+}
+#mniMavHu .label {
+
+        -fx-text-fill: #FFFFFF;
+
 }
 
-#mniObbHu: {
-            -fx-background: -fx-accent;
-            -fx-background-color: #FFF-FFF;
-            -fx-text-fill: #000080;
-            -fx-font-family: "Segoe UI Bold";
-            -fx-font-size: 14px;
-            -fx-font-weight: bold;
+
+#mniObbHu {
+
+            -fx-background-color: #FFFFFF;
+
+}
+
+#mniObbHu .label {
+
+            -fx-text-fill: #20B2AA;
+
 
 }
 
 #mniDbHun {
+
+            -fx-background-color: #FFFFFF;
+
+}
+
+#mniDbHun .label {
+
+            -fx-text-fill: #20B2AA;
+
 }
 
 #mniSbbHun {
+
+            -fx-background-color: #008000;
+
+
+}
+
+#mniSbbHun .label {
+
+            -fx-text-fill: #FFFFFF;
+
 }
 
 #mniMavDe {
+
+        -fx-background-color: #000000;
+
+
+}
+#mniMavDe .label {
+
+        -fx-text-fill: 	#FFF8DC;
+
 }
 
 #mniObbDe {
+
+        -fx-background-color: #FF0000;
+
+}
+
+#mniObbDe .label {
+
+        -fx-text-fill: #FFFFFF;
+
 }
 
 #mniDbDe {
+
+    -fx-background-color: #FF0000;
+
+
+}
+
+#mniDbDe .label {
+
+    -fx-text-fill: #FFFFFF;
+
 }
 
 #miniSbbDe {
+
+        -fx-background-color: #FFFF00;
+
+}
+
+#miniSbbDe .label {
+
+        -fx-text-fill: #008080;
+
 }
