@@ -51,8 +51,6 @@ public class DetailsViewController implements Initializable {
 
         stations = new ArrayList<String>();
 
-
-
         data = DataSingeleton.getInstance();
 
 
