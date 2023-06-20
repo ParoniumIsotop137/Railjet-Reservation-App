@@ -72,7 +72,7 @@ public class MainPageController implements Initializable {
     private MenuItem mniObbDe;
     private String mniObbDeLink;
     DataSingeleton data;
-    private String ticket;
+    private List<String> tickets;
     private String db_url;
     private String userName;
     private String password;
@@ -99,7 +99,7 @@ public class MainPageController implements Initializable {
         btnShoppingCart.setVisible(false);
         btnChoose.setVisible(false);
         btnChoose.setOnMouseClicked(mouseEvent -> AddSeatToTrain());
-        ticket = "";
+        tickets = new ArrayList<String>();
         trainNumber = "";
 
         /*
@@ -355,7 +355,7 @@ public class MainPageController implements Initializable {
     private void showShoppingCart(){
 
         Parent root;
-        ticket = this.seat.toString();
+        tickets.add(this.seat.toString());
 
 
         try {
@@ -366,7 +366,7 @@ public class MainPageController implements Initializable {
             String css = this.getClass().getResource("listview.css").toExternalForm();
 
             ShoppingCardController scc = loader.getController();
-            scc.setTicket(ticket);
+            scc.setTickets(tickets);
             Stage secondStage = new Stage();
             Scene scene = new Scene(root);
             scene.setUserData(data.getSeat());
