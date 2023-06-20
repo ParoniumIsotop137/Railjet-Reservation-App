@@ -44,7 +44,6 @@ public class ShoppingCardController implements Initializable {
     @FXML
     public void FillTheListView(ActionEvent event) {
 
-        tickets.add(getTicket());
         int n = 1;
         for (String ticket : tickets){
             listItems.add(String.valueOf(n)+". "+ticket);
@@ -53,11 +52,11 @@ public class ShoppingCardController implements Initializable {
         btnTickets.setDisable(true);
     }
 
-    public String getTicket() {
-        return ticket;
+    public List<String> getTickets() {
+        return tickets;
     }
 
-    public void setTicket(String ticket) {
-        this.ticket = ticket;
+    public void setTickets(List<String> tickets) {
+        this.tickets = tickets;
     }
 }

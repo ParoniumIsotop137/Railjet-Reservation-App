@@ -55,22 +55,10 @@ public class DBController {
 
     }
 
-    public void StartSaving() throws SQLException {
+    public void ResetTrainData(String trainNumber) throws SQLException {
 
         try {
-            stm = conn.prepareStatement("start transaction");
-            stm.execute();
-            stm.clearParameters();
-        } catch (Exception e) {
-            throw new SQLException("Visszaállítási pont létrehozása sikertelen! / Erstellen des Rücksetzungspunktes fehlgeschlagen!");
-        }
-
-    }
-
-    public void ResetTrainData() throws SQLException {
-
-        try {
-            stm = conn.prepareStatement("rollback");
+            stm = conn.prepareStatement("update "+trainNumber+" set reservierungen=0");
             stm.execute();
             stm.clearParameters();
         } catch (Exception e) {
@@ -96,6 +84,7 @@ public class DBController {
             rs.close();
             stm.clearParameters();
 
+
         } catch (Exception e) {
             throw new SQLException("Sikertelen adatbetöltés! / Beim laden der Dateien ist ein Fehler aufgetreten! "+e.getMessage());
         }
@@ -106,6 +95,7 @@ public class DBController {
     public void setReservations(Railcar car, String trainNumber) throws SQLException {
 
         try {
+
 
             stm = conn.prepareStatement("update "+trainNumber+" set reservierungen=? where id=? and wagennummer=?");
             stm.setInt(1, car.getReservedSeatsNumber());
