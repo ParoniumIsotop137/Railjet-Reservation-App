@@ -65,3 +65,40 @@
             -fx-font-weight: bold;
 
 }
+
+#mniMavHu {
+
+            -fx-background-color: #FF0000;
+            -fx-text-fill: #FFFFFF;
+            -fx-font-family: "Segoe UI Bold";
+            -fx-font-size: 14px;
+            -fx-font-weight: bold;
+}
+
+#mniObbHu: {
+            -fx-background: -fx-accent;
+            -fx-background-color: #FFF-FFF;
+            -fx-text-fill: #000080;
+            -fx-font-family: "Segoe UI Bold";
+            -fx-font-size: 14px;
+            -fx-font-weight: bold;
+
+}
+
+#mniDbHun {
+}
+
+#mniSbbHun {
+}
+
+#mniMavDe {
+}
+
+#mniObbDe {
+}
+
+#mniDbDe {
+}
+
+#miniSbbDe {
+}
